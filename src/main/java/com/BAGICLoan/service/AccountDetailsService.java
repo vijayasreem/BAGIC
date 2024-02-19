@@ -45,10 +45,8 @@ public class AccountDetailsService {
 
         return null;
     }
+    
+    public AccountDetails findByPhone(String phoneNumber) {
+        return accountDetailsRepository.findByPhone(phoneNumber);
+    }
 }
-
-In the above service class, I have implemented the required business methods findByUserId, findByEmail, findByMobileNumber, and findByAadharNumber as per the AccountDetailsRepository interface.
-
-Additionally, I have implemented the updateAccountDetails method which allows users to update their account details such as name and PIN. This method retrieves the account details by user ID, performs the necessary updates, and saves the modified details back to the repository.
-
-You can now use this service class to access and update account details from the user dashboard, ensuring data integrity and enforcing security requirements for the new PIN.
