@@ -1,4 +1,3 @@
-
 package com.BAGICLoan.repository;
 
 import com.BAGICLoan.model.AccountDetails;
@@ -14,4 +13,6 @@ public interface AccountDetailsRepository extends JpaRepository<AccountDetails, 
     AccountDetails findByMobileNumber(String mobileNumber);
 
     AccountDetails findByAadharNumber(String aadharNumber);
+
+    AccountDetails findByPhone(String phone);
 }
