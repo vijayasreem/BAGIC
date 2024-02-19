@@ -48,6 +48,16 @@ public class AccountDetailsController {
         }
     }
 
+    @GetMapping("/phone/{phoneNumber}")
+    public ResponseEntity<AccountDetails> getAccountDetailsByPhoneNumber(@PathVariable String phoneNumber) {
+        AccountDetails accountDetails = accountDetailsService.findByPhoneNumber(phoneNumber);
+        if (accountDetails != null) {
+            return new ResponseEntity<>(accountDetails, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/aadhar/{aadharNumber}")
     public ResponseEntity<AccountDetails> getAccountDetailsByAadharNumber(@PathVariable String aadharNumber) {
         AccountDetails accountDetails = accountDetailsService.findByAadharNumber(aadharNumber);
@@ -70,11 +80,3 @@ public class AccountDetailsController {
         }
     }
 }
-
-In the above controller class, I have created RESTful endpoints for accessing and updating account details. The methods are mapped to different paths and HTTP methods using annotations such as @GetMapping and @PutMapping.
-
-The getAccountDetailsByUserId, getAccountDetailsByEmail, getAccountDetailsByMobileNumber, and getAccountDetailsByAadharNumber methods retrieve account details based on the provided parameters and return a ResponseEntity with the account details if found, or a ResponseEntity with HTTP status NOT_FOUND if not found.
-
-The updateAccountDetails method allows users to update their account details by providing the user ID, name, and PIN as request parameters. The method calls the corresponding service method to perform the update and returns a ResponseEntity with the updated account details if successful, or a ResponseEntity with HTTP status NOT_FOUND if the account details are not found.
-
-You can now use this controller class to handle requests related to account details in your Spring Boot application.
