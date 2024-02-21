@@ -20,7 +20,14 @@ public class LoanApplicationController {
 
     @GetMapping("/byApplicationType/{applicationType}")
     public List<LoanApplication> getLoanApplicationsByApplicationType(@PathVariable String applicationType) {
-        return loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
+        List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
+        
+        if (loanApplications.isEmpty()) {
+            // Return an empty list with a message indicating no applications were found
+            return new ArrayList<>();
+        }
+        
+        return loanApplications;
     }
 
     @GetMapping("/byApprovalStatus/{approvalStatus}")
@@ -43,6 +50,6 @@ public class LoanApplicationController {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
     }
 
-    // Other business methods can be added here
+    // Other business methods can be added here.
 
 }
