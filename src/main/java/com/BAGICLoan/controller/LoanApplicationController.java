@@ -50,8 +50,9 @@ public class LoanApplicationController {
     @GetMapping("/byApplicantEmail/{applicantEmail}")
     public List<LoanApplication> getLoanApplicationsByApplicantEmail(@PathVariable String applicantEmail) {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
+
     }
 
-    // Other business methods can be removed here.
+    // Other business methods can be deleted here.
 
-}
+    }
