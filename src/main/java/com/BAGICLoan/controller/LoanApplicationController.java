@@ -52,6 +52,6 @@ public class LoanApplicationController {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
     }
 
-    // Other business methods can be added here.
+    // Other business methods can be deleted here....
 
-}
+    }
