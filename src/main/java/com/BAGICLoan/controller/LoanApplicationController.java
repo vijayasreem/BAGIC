@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/loanApplications")
@@ -20,16 +22,21 @@ public class LoanApplicationController {
     }
 
     @GetMapping("/byApplicationType/{applicationType}")
-    public List<LoanApplication> getLoanApplicationsByApplicationType(@PathVariable String applicationType) {
+    public Map<String, List<String>> getLoanApplicationsByApplicationType(@PathVariable String applicationType) {
         List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
         
         if (loanApplications.isEmpty()) {
             // Return an empty list with a message indicating no applications were found
             System.out.println("No loan applications found for the provided application type.");
-            return new ArrayList<>();
+            return new HashMap<>();
         }
         
-        return loanApplications;
+        // Group the loan applications by the applicant name and mobile number
+        Map<String, List<String>> loanApplicationsByApplicantNameAndMobile = loanApplications.stream()
+                .collect(Collectors.groupingBy(LoanApplication::getApplicantName,
+                        Collectors.mapping(LoanApplication::getMobileNumber, Collectors.toList())));
+        
+        return loanApplicationsByApplicantNameAndMobile;
     }
 
     @GetMapping("/byApprovalStatus/{approvalStatus}")
@@ -52,6 +59,6 @@ public class LoanApplicationController {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
     }
 
-    // Other business methods can be added here.
+    // Other business methods can be deleted here.
 
 }
