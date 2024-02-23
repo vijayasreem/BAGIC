@@ -42,6 +42,7 @@ public class LoanApplicationController {
         
         if (loanApplications.isEmpty()) {
             System.out.println("No loan applications found for the provided approval status and applicant name.");
+            return new ArrayList<>();
         }
         
         return loanApplications;
