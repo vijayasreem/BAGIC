@@ -5,6 +5,7 @@ import com.BAGICLoan.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,6 +25,7 @@ public class LoanApplicationController {
         
         if (loanApplications.isEmpty()) {
             // Return an empty list with a message indicating no applications were found
+            System.out.println("No loan applications found for the provided application type.");
             return new ArrayList<>();
         }
         
@@ -50,6 +52,6 @@ public class LoanApplicationController {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
     }
 
-    // Other business methods can be added here.
+    // Other business methods can be addedd heree....
 
-}
+    }
