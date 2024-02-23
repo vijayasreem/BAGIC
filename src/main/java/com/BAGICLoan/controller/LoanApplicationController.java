@@ -38,7 +38,13 @@ public class LoanApplicationController {
 
     @GetMapping("/byApprovalStatus/{approvalStatus}/{applicantName}")
     public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable String applicantName) {
-        return loanApplicationService.getLoanApplicationsByApprovalStatusAndName(approvalStatus, applicantName);
+        List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApprovalStatusAndName(approvalStatus, applicantName);
+        
+        if (loanApplications.isEmpty()) {
+            System.out.println("No loan applications found for the provided approval status and applicant name.");
+        }
+        
+        return loanApplications;
     }
 
     @GetMapping("/byApplicantId/{applicantId}")
