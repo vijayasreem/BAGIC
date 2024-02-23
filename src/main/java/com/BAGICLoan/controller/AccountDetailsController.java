@@ -20,7 +20,7 @@ public class AccountDetailsController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<AccountDetails> getAccountDetailsByUserId(@PathVariable Long userId) {
-        if (userId == null || userId == 0) {
+        if (userId == null || userId <= 0) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         AccountDetails accountDetails = accountDetailsService.findByUserId(userId);
