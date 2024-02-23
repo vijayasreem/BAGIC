@@ -21,44 +21,27 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/byApplicationType/{applicationType}")
-    public Map<String, List<String>> getLoanApplicationsByApplicationType(@PathVariable String applicationType) {
-        List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
+    @GetMapping("/byApplicationType")
+    public Map<String, List<LoanApplication>> getLoanApplicationsByApplicationType(@RequestParam List<String> applicationTypes) {
+        Map<String, List<LoanApplication>> loanApplicationsByApplicantName = new HashMap<>();
         
-        if (loanApplications.isEmpty()) {
-            // Return an empty list with a message indicating no applications were found
-            System.out.println("No loan applications found for the provided application type.");
-            return new HashMap<>();
+        for(String applicationType : applicationTypes) {
+            List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
+            
+            if (!loanApplications.isEmpty()) {
+                // Group the loan applications by the applicant name
+                loanApplicationsByApplicantName.putAll(loanApplications.stream()
+                        .collect(Collectors.groupingBy(LoanApplication::getApplicantName)));
+            }
         }
         
-        // Group the loan applications by the applicant name and mobile number
-        Map<String, List<String>> loanApplicationsByApplicantNameAndMobile = loanApplications.stream()
-                .collect(Collectors.groupingBy(LoanApplication::getApplicantName,
-                        Collectors.mapping(LoanApplication::getMobileNumber, Collectors.toList())));
+        if (loanApplicationsByApplicantName.isEmpty()) {
+            // Return an empty list with a message indicating no applications were found
+            System.out.println("No loan applications found for the provided application types.");
+        }
         
-        return loanApplicationsByApplicantNameAndMobile;
+        return loanApplicationsByApplicantName;
     }
 
-    @GetMapping("/byApprovalStatus/{approvalStatus}")
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable String approvalStatus) {
-        return loanApplicationService.getLoanApplicationsByApprovalStatus(approvalStatus);
-    }
-
-    @GetMapping("/byApplicantId/{applicantId}")
-    public List<LoanApplication> getLoanApplicationsByApplicantId(@PathVariable Long applicantId) {
-        return loanApplicationService.getLoanApplicationsByApplicantId(applicantId);
-    }
-
-    @GetMapping("/byApplicantName/{applicantName}")
-    public List<LoanApplication> getLoanApplicationsByApplicantName(@PathVariable String applicantName) {
-        return loanApplicationService.getLoanApplicationsByApplicantName(applicantName);
-    }
-
-    @GetMapping("/byApplicantEmail/{applicantEmail}")
-    public List<LoanApplication> getLoanApplicationsByApplicantEmail(@PathVariable String applicantEmail) {
-        return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
-    }
-
-    // Other business methods can be deleted here.
-
+    // Rest of the code remains the same
 }
