@@ -26,21 +26,19 @@ public class LoanApplicationController {
         List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
         
         if (loanApplications.isEmpty()) {
-            // Return an empty list with a message indicating no applications were found
             System.out.println("No loan applications found for the provided application type.");
             return new HashMap<>();
         }
         
-        // Group the loan applications by the applicant name
         Map<String, List<LoanApplication>> loanApplicationsByApplicantName = loanApplications.stream()
                 .collect(Collectors.groupingBy(LoanApplication::getApplicantName));
         
         return loanApplicationsByApplicantName;
     }
 
-    @GetMapping("/byApprovalStatus/{approvalStatus}")
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable String approvalStatus) {
-        return loanApplicationService.getLoanApplicationsByApprovalStatus(approvalStatus);
+    @GetMapping("/byApprovalStatus/{approvalStatus}/{applicantName}")
+    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable String approvalStatus, @PathVariable String applicantName) {
+        return loanApplicationService.getLoanApplicationsByApprovalStatusAndName(approvalStatus, applicantName);
     }
 
     @GetMapping("/byApplicantId/{applicantId}")
@@ -57,7 +55,4 @@ public class LoanApplicationController {
     public List<LoanApplication> getLoanApplicationsByApplicantEmail(@PathVariable String applicantEmail) {
         return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
     }
-
-    // Other business methods can be deleted here.
-
 }
