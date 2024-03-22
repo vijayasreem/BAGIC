@@ -5,7 +5,6 @@ import com.BAGICLoan.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,39 +18,26 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/byApplicationType/{applicationType}")
-    public List<LoanApplication> getLoanApplicationsByApplicationType(@PathVariable String applicationType) {
-        List<LoanApplication> loanApplications = loanApplicationService.getLoanApplicationsByApplicationType(applicationType);
-        
-        if (loanApplications.isEmpty()) {
-            // Return an empty list with a message indicating no applications were found
-            System.out.println("No loan applications found for the provided application type.");
-            return new ArrayList<>();
-        }
-        
-        return loanApplications;
+    @GetMapping("/{applicantId}")
+    public LoanApplication getLoanApplicationByApplicantId(@PathVariable Long applicantId) {
+        return loanApplicationService.getLoanApplicationByApplicantId(applicantId);
     }
 
-    @GetMapping("/byApprovalStatus/{approvalStatus}")
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable String approvalStatus) {
-        return loanApplicationService.getLoanApplicationsByApprovalStatus(approvalStatus);
+    @GetMapping("/creditScore/{creditScore}")
+    public List<LoanApplication> getLoanApplicationsWithCreditScoreGreaterThanEqual(@PathVariable int creditScore) {
+        return loanApplicationService.getLoanApplicationsWithCreditScoreGreaterThanEqual(creditScore);
     }
 
-    @GetMapping("/byApplicantId/{applicantId}")
-    public List<LoanApplication> getLoanApplicationsByApplicantId(@PathVariable Long applicantId) {
-        return loanApplicationService.getLoanApplicationsByApplicantId(applicantId);
+    @GetMapping("/approved")
+    public List<LoanApplication> getApprovedLoanApplications() {
+        return loanApplicationService.getApprovedLoanApplications();
     }
 
-    @GetMapping("/byApplicantName/{applicantName}")
-    public List<LoanApplication> getLoanApplicationsByApplicantName(@PathVariable String applicantName) {
-        return loanApplicationService.getLoanApplicationsByApplicantName(applicantName);
+    @GetMapping("/approved/{applicantId}")
+    public LoanApplication getApprovedLoanApplicationByApplicantId(@PathVariable Long applicantId) {
+        return loanApplicationService.getApprovedLoanApplicationByApplicantId(applicantId);
     }
 
-    @GetMapping("/byApplicantEmail/{applicantEmail}")
-    public List<LoanApplication> getLoanApplicationsByApplicantEmail(@PathVariable String applicantEmail) {
-        return loanApplicationService.getLoanApplicationsByApplicantEmail(applicantEmail);
-    }
+    // Add more request mapping methods for additional business methods as per your requirements
 
-    // Other business methods can be added here.
-
-    }
+}

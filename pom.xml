@@ -8,14 +8,14 @@
 		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.BAGICLoan</groupId>
-	<artifactId>SAC-43</artifactId>
+	<groupId>com.sacral.java</groupId>
+	<artifactId>SAC-44</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>BAGIC</name>
-	<description>BAGIC</description>
+	<name>LICProject</name>
+	<description>LICProject</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

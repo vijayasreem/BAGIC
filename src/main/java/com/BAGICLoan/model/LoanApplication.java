@@ -1,4 +1,6 @@
+s the corresponding Entity/Model class for the given Repository:
 
+```
 package com.BAGICLoan.model;
 
 import javax.persistence.*;
@@ -11,22 +13,16 @@ public class LoanApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "application_type")
-    private String applicationType;
-
-    @Column(name = "approval_status")
-    private String approvalStatus;
-
     @Column(name = "applicant_id")
     private Long applicantId;
 
-    @Column(name = "applicant_name")
-    private String applicantName;
+    @Column(name = "credit_score")
+    private int creditScore;
 
-    @Column(name = "applicant_email")
-    private String applicantEmail;
+    @Column(name = "status")
+    private String status;
 
-    // Getters and setters
+    // Add getters and setters
 
     public Long getId() {
         return id;
@@ -34,22 +30,6 @@ public class LoanApplication {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getApplicationType() {
-        return applicationType;
-    }
-
-    public void setApplicationType(String applicationType) {
-        this.applicationType = applicationType;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
     }
 
     public Long getApplicantId() {
@@ -60,19 +40,19 @@ public class LoanApplication {
         this.applicantId = applicantId;
     }
 
-    public String getApplicantName() {
-        return applicantName;
+    public int getCreditScore() {
+        return creditScore;
     }
 
-    public void setApplicantName(String applicantName) {
-        this.applicantName = applicantName;
+    public void setCreditScore(int creditScore) {
+        this.creditScore = creditScore;
     }
 
-    public String getApplicantEmail() {
-        return applicantEmail;
+    public String getStatus() {
+        return status;
     }
 
-    public void setApplicantEmail(String applicantEmail) {
-        this.applicantEmail = applicantEmail;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

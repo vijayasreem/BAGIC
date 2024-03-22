@@ -1,3 +1,4 @@
+
 package com.BAGICLoan.service;
 
 import com.BAGICLoan.model.LoanApplication;
@@ -17,25 +18,22 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public List<LoanApplication> getLoanApplicationsByApplicationType(String applicationType) {
-        return loanApplicationRepository.findByApplicationType(applicationType);
-    }
-
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(String approvalStatus) {
-        return loanApplicationRepository.findByApprovalStatus(approvalStatus);
-    }
-
-    public List<LoanApplication> getLoanApplicationsByApplicantId(Long applicantId) {
+    public LoanApplication getLoanApplicationByApplicantId(Long applicantId) {
         return loanApplicationRepository.findByApplicantId(applicantId);
     }
 
-    public List<LoanApplication> getLoanApplicationsByApplicantName(String applicantName) {
-        return loanApplicationRepository.findByApplicantName(applicantName);
+    public List<LoanApplication> getLoanApplicationsWithCreditScoreGreaterThanEqual(int creditScore) {
+        return loanApplicationRepository.findByCreditScoreGreaterThanEqual(creditScore);
     }
 
-    public List<LoanApplication> getLoanApplicationsByApplicantEmail(String applicantEmail) {
-        return loanApplicationRepository.findByApplicantEmail(applicantEmail);
+    public List<LoanApplication> getApprovedLoanApplications() {
+        return loanApplicationRepository.findApprovedLoanApplications();
     }
 
-    // Other business methods can be added here
+    public LoanApplication getApprovedLoanApplicationByApplicantId(Long applicantId) {
+        return loanApplicationRepository.findApprovedLoanApplicationByApplicantId(applicantId);
+    }
+
+    // Add more business methods as per your requirements
+
 }
