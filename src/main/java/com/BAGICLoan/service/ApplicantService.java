@@ -1,35 +1,34 @@
 package com.BAGICLoan.service;
 
-import com.BAGICLoan.model.Applicant;
-import com.BAGICLoan.repository.ApplicantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.BAGICLoan.model.Applicant;
+import com.BAGICLoan.repository.ApplicantRepository;
 
 @Service
 public class ApplicantService {
 
-    private final ApplicantRepository applicantRepository;
+    private ApplicantRepository applicantRepository;
 
     @Autowired
     public ApplicantService(ApplicantRepository applicantRepository) {
         this.applicantRepository = applicantRepository;
     }
 
-    public List<Applicant> findByCreditScoreAndFinancialHistory(int minCreditScore, String financialHistory) {
-        return applicantRepository.findByCreditScoreAndFinancialHistory(minCreditScore, financialHistory);
-    }
-
-    public Double calculateAverageLoanAmount(int minCreditScore, String financialHistory) {
-        return applicantRepository.calculateAverageLoanAmount(minCreditScore, financialHistory);
-    }
-
-    public Double findMinInterestRate(int minCreditScore, String financialHistory) {
-        return applicantRepository.findMinInterestRate(minCreditScore, financialHistory);
-    }
-
-    public Double findMaxInterestRate(int minCreditScore, String financialHistory) {
-        return applicantRepository.findMaxInterestRate(minCreditScore, financialHistory);
+    public void validateCreditEvaluation(double annualIncome, int creditScore) {
+        Applicant applicant = applicantRepository.findByIncomeAndCreditScore(annualIncome, creditScore);
+        
+        if (applicant != null) {
+            if (annualIncome >= 30000 && creditScore >= 700) {
+                System.out.println("Congratulations! You are eligible for a credit score with a high limit.");
+            } else if (annualIncome >= 20000 && creditScore >= 600) {
+                System.out.println("Congratulations! You are eligible for a credit score with a moderate limit.");
+            } else {
+                System.out.println("Sorry, you are not eligible for a credit score.");
+            }
+        } else {
+            System.out.println("No applicant found with the given income and credit score.");
+        }
     }
 }
