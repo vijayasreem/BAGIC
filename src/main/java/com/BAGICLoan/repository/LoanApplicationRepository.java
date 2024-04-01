@@ -4,23 +4,30 @@ package com.BAGICLoan.repository;
 import com.BAGICLoan.model.LoanApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.applicantId = ?1")
-    LoanApplication findByApplicantId(Long applicantId);
+    // Method to retrieve all loan applications
+    List<LoanApplication> findAll();
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.creditScore >= ?1")
-    List<LoanApplication> findByCreditScoreGreaterThanEqual(int creditScore);
+    // Method to retrieve loan applications by document verification status
+    List<LoanApplication> findByDocumentVerified(boolean documentVerified);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = 'APPROVED'")
-    List<LoanApplication> findApprovedLoanApplications();
+    // Method to retrieve loan applications by creditworthiness status
+    List<LoanApplication> findByCreditworthinessVerified(boolean creditworthinessVerified);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = 'APPROVED' AND la.applicantId = ?1")
-    LoanApplication findApprovedLoanApplicationByApplicantId(Long applicantId);
+    // Method to retrieve loan applications by approval status
+    List<LoanApplication> findByApproved(boolean approved);
 
-    // You can add more custom queries as per your requirements
+    // Method to retrieve loan applications by applicant's credit score
+    List<LoanApplication> findByApplicantCreditScoreGreaterThanEqual(int creditScore);
 
+    // Method to retrieve loan applications by applicant's income
+    @Query("SELECT la FROM LoanApplication la WHERE la.applicantIncome >= ?1")
+    List<LoanApplication> findByApplicantIncomeGreaterThanEqual(double income);
+
+    // Method to retrieve loan applications by applicant's employment details
+    List<LoanApplication> findByApplicantEmploymentDetails(String employmentDetails);
 }

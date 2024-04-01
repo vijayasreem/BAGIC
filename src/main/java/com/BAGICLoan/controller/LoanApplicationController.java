@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/loanApplications")
+@RequestMapping("/loan-applications")
 public class LoanApplicationController {
 
     private final LoanApplicationService loanApplicationService;
@@ -18,26 +18,38 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/{applicantId}")
-    public LoanApplication getLoanApplicationByApplicantId(@PathVariable Long applicantId) {
-        return loanApplicationService.getLoanApplicationByApplicantId(applicantId);
+    @GetMapping
+    public List<LoanApplication> getAllLoanApplications() {
+        return loanApplicationService.getAllLoanApplications();
     }
 
-    @GetMapping("/creditScore/{creditScore}")
-    public List<LoanApplication> getLoanApplicationsWithCreditScoreGreaterThanEqual(@PathVariable int creditScore) {
-        return loanApplicationService.getLoanApplicationsWithCreditScoreGreaterThanEqual(creditScore);
+    @GetMapping("/document-verification/{documentVerified}")
+    public List<LoanApplication> getLoanApplicationsByDocumentVerificationStatus(@PathVariable boolean documentVerified) {
+        return loanApplicationService.getLoanApplicationsByDocumentVerificationStatus(documentVerified);
     }
 
-    @GetMapping("/approved")
-    public List<LoanApplication> getApprovedLoanApplications() {
-        return loanApplicationService.getApprovedLoanApplications();
+    @GetMapping("/creditworthiness-verification/{creditworthinessVerified}")
+    public List<LoanApplication> getLoanApplicationsByCreditworthinessVerificationStatus(@PathVariable boolean creditworthinessVerified) {
+        return loanApplicationService.getLoanApplicationsByCreditworthinessVerificationStatus(creditworthinessVerified);
     }
 
-    @GetMapping("/approved/{applicantId}")
-    public LoanApplication getApprovedLoanApplicationByApplicantId(@PathVariable Long applicantId) {
-        return loanApplicationService.getApprovedLoanApplicationByApplicantId(applicantId);
+    @GetMapping("/approval/{approved}")
+    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable boolean approved) {
+        return loanApplicationService.getLoanApplicationsByApprovalStatus(approved);
     }
 
-    // Add more request mapping methods for additional business methods as per your requirements
+    @GetMapping("/applicant-credit-score/{creditScore}")
+    public List<LoanApplication> getLoanApplicationsByApplicantCreditScore(@PathVariable int creditScore) {
+        return loanApplicationService.getLoanApplicationsByApplicantCreditScore(creditScore);
+    }
 
+    @GetMapping("/applicant-income/{income}")
+    public List<LoanApplication> getLoanApplicationsByApplicantIncome(@PathVariable double income) {
+        return loanApplicationService.getLoanApplicationsByApplicantIncome(income);
+    }
+
+    @GetMapping("/applicant-employment-details/{employmentDetails}")
+    public List<LoanApplication> getLoanApplicationsByApplicantEmploymentDetails(@PathVariable String employmentDetails) {
+        return loanApplicationService.getLoanApplicationsByApplicantEmploymentDetails(employmentDetails);
+    }
 }

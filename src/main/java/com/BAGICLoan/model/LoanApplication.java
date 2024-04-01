@@ -1,28 +1,25 @@
-s the corresponding Entity/Model class for the given Repository:
 
-```
 package com.BAGICLoan.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "loan_application")
 public class LoanApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private boolean documentVerified;
+    private boolean creditworthinessVerified;
+    private boolean approved;
+    private int applicantCreditScore;
+    private double applicantIncome;
+    private String applicantEmploymentDetails;
 
-    @Column(name = "applicant_id")
-    private Long applicantId;
-
-    @Column(name = "credit_score")
-    private int creditScore;
-
-    @Column(name = "status")
-    private String status;
-
-    // Add getters and setters
+    // getters and setters
 
     public Long getId() {
         return id;
@@ -32,27 +29,51 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public Long getApplicantId() {
-        return applicantId;
+    public boolean isDocumentVerified() {
+        return documentVerified;
     }
 
-    public void setApplicantId(Long applicantId) {
-        this.applicantId = applicantId;
+    public void setDocumentVerified(boolean documentVerified) {
+        this.documentVerified = documentVerified;
     }
 
-    public int getCreditScore() {
-        return creditScore;
+    public boolean isCreditworthinessVerified() {
+        return creditworthinessVerified;
     }
 
-    public void setCreditScore(int creditScore) {
-        this.creditScore = creditScore;
+    public void setCreditworthinessVerified(boolean creditworthinessVerified) {
+        this.creditworthinessVerified = creditworthinessVerified;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isApproved() {
+        return approved;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public int getApplicantCreditScore() {
+        return applicantCreditScore;
+    }
+
+    public void setApplicantCreditScore(int applicantCreditScore) {
+        this.applicantCreditScore = applicantCreditScore;
+    }
+
+    public double getApplicantIncome() {
+        return applicantIncome;
+    }
+
+    public void setApplicantIncome(double applicantIncome) {
+        this.applicantIncome = applicantIncome;
+    }
+
+    public String getApplicantEmploymentDetails() {
+        return applicantEmploymentDetails;
+    }
+
+    public void setApplicantEmploymentDetails(String applicantEmploymentDetails) {
+        this.applicantEmploymentDetails = applicantEmploymentDetails;
     }
 }

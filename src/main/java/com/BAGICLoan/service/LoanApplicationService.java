@@ -1,4 +1,3 @@
-
 package com.BAGICLoan.service;
 
 import com.BAGICLoan.model.LoanApplication;
@@ -18,22 +17,38 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public LoanApplication getLoanApplicationByApplicantId(Long applicantId) {
-        return loanApplicationRepository.findByApplicantId(applicantId);
+    // Method to retrieve all loan applications
+    public List<LoanApplication> getAllLoanApplications() {
+        return loanApplicationRepository.findAll();
     }
 
-    public List<LoanApplication> getLoanApplicationsWithCreditScoreGreaterThanEqual(int creditScore) {
-        return loanApplicationRepository.findByCreditScoreGreaterThanEqual(creditScore);
+    // Method to retrieve loan applications by document verification status
+    public List<LoanApplication> getLoanApplicationsByDocumentVerificationStatus(boolean documentVerified) {
+        return loanApplicationRepository.findByDocumentVerified(documentVerified);
     }
 
-    public List<LoanApplication> getApprovedLoanApplications() {
-        return loanApplicationRepository.findApprovedLoanApplications();
+    // Method to retrieve loan applications by creditworthiness status
+    public List<LoanApplication> getLoanApplicationsByCreditworthinessVerificationStatus(boolean creditworthinessVerified) {
+        return loanApplicationRepository.findByCreditworthinessVerified(creditworthinessVerified);
     }
 
-    public LoanApplication getApprovedLoanApplicationByApplicantId(Long applicantId) {
-        return loanApplicationRepository.findApprovedLoanApplicationByApplicantId(applicantId);
+    // Method to retrieve loan applications by approval status
+    public List<LoanApplication> getLoanApplicationsByApprovalStatus(boolean approved) {
+        return loanApplicationRepository.findByApproved(approved);
     }
 
-    // Add more business methods as per your requirements
+    // Method to retrieve loan applications by applicant's credit score
+    public List<LoanApplication> getLoanApplicationsByApplicantCreditScore(int creditScore) {
+        return loanApplicationRepository.findByApplicantCreditScoreGreaterThanEqual(creditScore);
+    }
 
+    // Method to retrieve loan applications by applicant's income
+    public List<LoanApplication> getLoanApplicationsByApplicantIncome(double income) {
+        return loanApplicationRepository.findByApplicantIncomeGreaterThanEqual(income);
+    }
+
+    // Method to retrieve loan applications by applicant's employment details
+    public List<LoanApplication> getLoanApplicationsByApplicantEmploymentDetails(String employmentDetails) {
+        return loanApplicationRepository.findByApplicantEmploymentDetails(employmentDetails);
+    }
 }
