@@ -4,30 +4,32 @@ package com.BAGICLoan.repository;
 import com.BAGICLoan.model.LoanApplication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
+@Repository
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {
 
-    // Method to retrieve all loan applications
-    List<LoanApplication> findAll();
+    @Query("SELECT la FROM LoanApplication la WHERE la.applicantId = ?1")
+    LoanApplication findByApplicantId(String applicantId);
 
-    // Method to retrieve loan applications by document verification status
-    List<LoanApplication> findByDocumentVerified(boolean documentVerified);
+    @Query("SELECT la FROM LoanApplication la WHERE la.creditScore >= ?1")
+    List<LoanApplication> findByCreditScoreGreaterThanEqual(int creditScore);
 
-    // Method to retrieve loan applications by creditworthiness status
-    List<LoanApplication> findByCreditworthinessVerified(boolean creditworthinessVerified);
+    @Query("SELECT la FROM LoanApplication la WHERE la.loanAmount <= ?1")
+    List<LoanApplication> findByLoanAmountLessThanEqual(double loanAmount);
 
-    // Method to retrieve loan applications by approval status
-    List<LoanApplication> findByApproved(boolean approved);
+    @Query("SELECT la FROM LoanApplication la WHERE la.interestRate <= ?1")
+    List<LoanApplication> findByInterestRateLessThanEqual(double interestRate);
 
-    // Method to retrieve loan applications by applicant's credit score
-    List<LoanApplication> findByApplicantCreditScoreGreaterThanEqual(int creditScore);
+    @Query("SELECT la FROM LoanApplication la WHERE la.repaymentPeriod <= ?1")
+    List<LoanApplication> findByRepaymentPeriodLessThanEqual(int repaymentPeriod);
 
-    // Method to retrieve loan applications by applicant's income
-    @Query("SELECT la FROM LoanApplication la WHERE la.applicantIncome >= ?1")
-    List<LoanApplication> findByApplicantIncomeGreaterThanEqual(double income);
+    @Query("SELECT la FROM LoanApplication la WHERE la.status = ?1")
+    List<LoanApplication> findByStatus(String status);
 
-    // Method to retrieve loan applications by applicant's employment details
-    List<LoanApplication> findByApplicantEmploymentDetails(String employmentDetails);
+    @Query("SELECT la FROM LoanApplication la WHERE la.status = 'Rejected' AND la.rejectionReason IS NOT NULL")
+    List<LoanApplication> findRejectedApplicationsWithReason();
+
+    // Additional methods for specific queries or operations can be added here
+
 }

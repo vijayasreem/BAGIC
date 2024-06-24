@@ -18,38 +18,41 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping
-    public List<LoanApplication> getAllLoanApplications() {
-        return loanApplicationService.getAllLoanApplications();
+    @GetMapping("/{applicantId}")
+    public LoanApplication findByApplicantId(@PathVariable String applicantId) {
+        return loanApplicationService.findByApplicantId(applicantId);
     }
 
-    @GetMapping("/document-verification/{documentVerified}")
-    public List<LoanApplication> getLoanApplicationsByDocumentVerificationStatus(@PathVariable boolean documentVerified) {
-        return loanApplicationService.getLoanApplicationsByDocumentVerificationStatus(documentVerified);
+    @GetMapping("/credit-score/{creditScore}")
+    public List<LoanApplication> findByCreditScoreGreaterThanEqual(@PathVariable int creditScore) {
+        return loanApplicationService.findByCreditScoreGreaterThanEqual(creditScore);
     }
 
-    @GetMapping("/creditworthiness-verification/{creditworthinessVerified}")
-    public List<LoanApplication> getLoanApplicationsByCreditworthinessVerificationStatus(@PathVariable boolean creditworthinessVerified) {
-        return loanApplicationService.getLoanApplicationsByCreditworthinessVerificationStatus(creditworthinessVerified);
+    @GetMapping("/loan-amount/{loanAmount}")
+    public List<LoanApplication> findByLoanAmountLessThanEqual(@PathVariable double loanAmount) {
+        return loanApplicationService.findByLoanAmountLessThanEqual(loanAmount);
     }
 
-    @GetMapping("/approval/{approved}")
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(@PathVariable boolean approved) {
-        return loanApplicationService.getLoanApplicationsByApprovalStatus(approved);
+    @GetMapping("/interest-rate/{interestRate}")
+    public List<LoanApplication> findByInterestRateLessThanEqual(@PathVariable double interestRate) {
+        return loanApplicationService.findByInterestRateLessThanEqual(interestRate);
     }
 
-    @GetMapping("/applicant-credit-score/{creditScore}")
-    public List<LoanApplication> getLoanApplicationsByApplicantCreditScore(@PathVariable int creditScore) {
-        return loanApplicationService.getLoanApplicationsByApplicantCreditScore(creditScore);
+    @GetMapping("/repayment-period/{repaymentPeriod}")
+    public List<LoanApplication> findByRepaymentPeriodLessThanEqual(@PathVariable int repaymentPeriod) {
+        return loanApplicationService.findByRepaymentPeriodLessThanEqual(repaymentPeriod);
     }
 
-    @GetMapping("/applicant-income/{income}")
-    public List<LoanApplication> getLoanApplicationsByApplicantIncome(@PathVariable double income) {
-        return loanApplicationService.getLoanApplicationsByApplicantIncome(income);
+    @GetMapping("/status/{status}")
+    public List<LoanApplication> findByStatus(@PathVariable String status) {
+        return loanApplicationService.findByStatus(status);
     }
 
-    @GetMapping("/applicant-employment-details/{employmentDetails}")
-    public List<LoanApplication> getLoanApplicationsByApplicantEmploymentDetails(@PathVariable String employmentDetails) {
-        return loanApplicationService.getLoanApplicationsByApplicantEmploymentDetails(employmentDetails);
+    @GetMapping("/rejected-applications")
+    public List<LoanApplication> findRejectedApplicationsWithReason() {
+        return loanApplicationService.findRejectedApplicationsWithReason();
     }
+
+    // Additional methods for specific queries or operations can be added here
+
 }

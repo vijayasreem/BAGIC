@@ -1,25 +1,38 @@
 
 package com.BAGICLoan.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "loan_application")
 public class LoanApplication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean documentVerified;
-    private boolean creditworthinessVerified;
-    private boolean approved;
-    private int applicantCreditScore;
-    private double applicantIncome;
-    private String applicantEmploymentDetails;
 
-    // getters and setters
+    @Column(name = "applicant_id")
+    private String applicantId;
+
+    @Column(name = "credit_score")
+    private int creditScore;
+
+    @Column(name = "loan_amount")
+    private double loanAmount;
+
+    @Column(name = "interest_rate")
+    private double interestRate;
+
+    @Column(name = "repayment_period")
+    private int repaymentPeriod;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "rejection_reason")
+    private String rejectionReason;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -29,51 +42,59 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public boolean isDocumentVerified() {
-        return documentVerified;
+    public String getApplicantId() {
+        return applicantId;
     }
 
-    public void setDocumentVerified(boolean documentVerified) {
-        this.documentVerified = documentVerified;
+    public void setApplicantId(String applicantId) {
+        this.applicantId = applicantId;
     }
 
-    public boolean isCreditworthinessVerified() {
-        return creditworthinessVerified;
+    public int getCreditScore() {
+        return creditScore;
     }
 
-    public void setCreditworthinessVerified(boolean creditworthinessVerified) {
-        this.creditworthinessVerified = creditworthinessVerified;
+    public void setCreditScore(int creditScore) {
+        this.creditScore = creditScore;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public double getLoanAmount() {
+        return loanAmount;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setLoanAmount(double loanAmount) {
+        this.loanAmount = loanAmount;
     }
 
-    public int getApplicantCreditScore() {
-        return applicantCreditScore;
+    public double getInterestRate() {
+        return interestRate;
     }
 
-    public void setApplicantCreditScore(int applicantCreditScore) {
-        this.applicantCreditScore = applicantCreditScore;
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 
-    public double getApplicantIncome() {
-        return applicantIncome;
+    public int getRepaymentPeriod() {
+        return repaymentPeriod;
     }
 
-    public void setApplicantIncome(double applicantIncome) {
-        this.applicantIncome = applicantIncome;
+    public void setRepaymentPeriod(int repaymentPeriod) {
+        this.repaymentPeriod = repaymentPeriod;
     }
 
-    public String getApplicantEmploymentDetails() {
-        return applicantEmploymentDetails;
+    public String getStatus() {
+        return status;
     }
 
-    public void setApplicantEmploymentDetails(String applicantEmploymentDetails) {
-        this.applicantEmploymentDetails = applicantEmploymentDetails;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRejectionReason() {
+        return rejectionReason;
+    }
+
+    public void setRejectionReason(String rejectionReason) {
+        this.rejectionReason = rejectionReason;
     }
 }

@@ -17,38 +17,34 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    // Method to retrieve all loan applications
-    public List<LoanApplication> getAllLoanApplications() {
-        return loanApplicationRepository.findAll();
+    public LoanApplication findByApplicantId(String applicantId) {
+        return loanApplicationRepository.findByApplicantId(applicantId);
     }
 
-    // Method to retrieve loan applications by document verification status
-    public List<LoanApplication> getLoanApplicationsByDocumentVerificationStatus(boolean documentVerified) {
-        return loanApplicationRepository.findByDocumentVerified(documentVerified);
+    public List<LoanApplication> findByCreditScoreGreaterThanEqual(int creditScore) {
+        return loanApplicationRepository.findByCreditScoreGreaterThanEqual(creditScore);
     }
 
-    // Method to retrieve loan applications by creditworthiness status
-    public List<LoanApplication> getLoanApplicationsByCreditworthinessVerificationStatus(boolean creditworthinessVerified) {
-        return loanApplicationRepository.findByCreditworthinessVerified(creditworthinessVerified);
+    public List<LoanApplication> findByLoanAmountLessThanEqual(double loanAmount) {
+        return loanApplicationRepository.findByLoanAmountLessThanEqual(loanAmount);
     }
 
-    // Method to retrieve loan applications by approval status
-    public List<LoanApplication> getLoanApplicationsByApprovalStatus(boolean approved) {
-        return loanApplicationRepository.findByApproved(approved);
+    public List<LoanApplication> findByInterestRateLessThanEqual(double interestRate) {
+        return loanApplicationRepository.findByInterestRateLessThanEqual(interestRate);
     }
 
-    // Method to retrieve loan applications by applicant's credit score
-    public List<LoanApplication> getLoanApplicationsByApplicantCreditScore(int creditScore) {
-        return loanApplicationRepository.findByApplicantCreditScoreGreaterThanEqual(creditScore);
+    public List<LoanApplication> findByRepaymentPeriodLessThanEqual(int repaymentPeriod) {
+        return loanApplicationRepository.findByRepaymentPeriodLessThanEqual(repaymentPeriod);
     }
 
-    // Method to retrieve loan applications by applicant's income
-    public List<LoanApplication> getLoanApplicationsByApplicantIncome(double income) {
-        return loanApplicationRepository.findByApplicantIncomeGreaterThanEqual(income);
+    public List<LoanApplication> findByStatus(String status) {
+        return loanApplicationRepository.findByStatus(status);
     }
 
-    // Method to retrieve loan applications by applicant's employment details
-    public List<LoanApplication> getLoanApplicationsByApplicantEmploymentDetails(String employmentDetails) {
-        return loanApplicationRepository.findByApplicantEmploymentDetails(employmentDetails);
+    public List<LoanApplication> findRejectedApplicationsWithReason() {
+        return loanApplicationRepository.findRejectedApplicationsWithReason();
     }
+
+    // Additional methods for specific queries or operations can be added here
+
 }
