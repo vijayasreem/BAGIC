@@ -17,34 +17,18 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public LoanApplication findByApplicantId(String applicantId) {
-        return loanApplicationRepository.findByApplicantId(applicantId);
+    public List<LoanApplication> findByInPersonChannel() {
+        return loanApplicationRepository.findByInPersonChannel();
     }
 
-    public List<LoanApplication> findByCreditScoreGreaterThanEqual(int creditScore) {
-        return loanApplicationRepository.findByCreditScoreGreaterThanEqual(creditScore);
+    public List<LoanApplication> findByWebsiteChannel() {
+        return loanApplicationRepository.findByWebsiteChannel();
     }
 
-    public List<LoanApplication> findByLoanAmountLessThanEqual(double loanAmount) {
-        return loanApplicationRepository.findByLoanAmountLessThanEqual(loanAmount);
+    public List<LoanApplication> findByMobileAppChannel() {
+        return loanApplicationRepository.findByMobileAppChannel();
     }
 
-    public List<LoanApplication> findByInterestRateLessThanEqual(double interestRate) {
-        return loanApplicationRepository.findByInterestRateLessThanEqual(interestRate);
-    }
-
-    public List<LoanApplication> findByRepaymentPeriodLessThanEqual(int repaymentPeriod) {
-        return loanApplicationRepository.findByRepaymentPeriodLessThanEqual(repaymentPeriod);
-    }
-
-    public List<LoanApplication> findByStatus(String status) {
-        return loanApplicationRepository.findByStatus(status);
-    }
-
-    public List<LoanApplication> findRejectedApplicationsWithReason() {
-        return loanApplicationRepository.findRejectedApplicationsWithReason();
-    }
-
-    // Additional methods for specific queries or operations can be added here
+    // Add more business methods as needed
 
 }
