@@ -1,16 +1,23 @@
 
 package com.BAGICLoan.repository;
 
+import com.BAGICLoan.model.Applicant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.BAGICLoan.model.Applicant;
-
 @Repository
 public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
 
-    @Query("SELECT a FROM Applicant a WHERE a.annualIncome >= :income AND a.creditScore >= :score")
-    Applicant findByIncomeAndCreditScore(double income, int score);
+    @Query("SELECT a.creditScore FROM Applicant a WHERE a.id = :applicantId")
+    int getCreditScoreById(Long applicantId);
+
+    @Query("SELECT a.loanAmount FROM Applicant a WHERE a.id = :applicantId")
+    double getLoanAmountById(Long applicantId);
+
+    @Query("SELECT a.interestRate FROM Applicant a WHERE a.id = :applicantId")
+    double getInterestRateById(Long applicantId);
+
+    // Add other custom queries as needed
 
 }

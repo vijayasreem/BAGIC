@@ -1,27 +1,36 @@
 package com.BAGICLoan.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.BAGICLoan.model.Applicant;
 import com.BAGICLoan.service.ApplicantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/applicant")
+@RequestMapping("/applicants")
 public class ApplicantController {
 
-    private ApplicantService applicantService;
+    private final ApplicantService applicantService;
 
     @Autowired
     public ApplicantController(ApplicantService applicantService) {
         this.applicantService = applicantService;
     }
 
-    @GetMapping("/validate-credit-evaluation/{annualIncome}/{creditScore}")
-    public String validateCreditEvaluation(@PathVariable double annualIncome, @PathVariable int creditScore) {
-        applicantService.validateCreditEvaluation(annualIncome, creditScore);
-        return "Eligibility determination completed.";
+    @GetMapping("/{applicantId}/creditScore")
+    public int getCreditScoreById(@PathVariable Long applicantId) {
+        return applicantService.getCreditScoreById(applicantId);
     }
+
+    @GetMapping("/{applicantId}/loanAmount")
+    public double getLoanAmountById(@PathVariable Long applicantId) {
+        return applicantService.getLoanAmountById(applicantId);
+    }
+
+    @GetMapping("/{applicantId}/interestRate")
+    public double getInterestRateById(@PathVariable Long applicantId) {
+        return applicantService.getInterestRateById(applicantId);
+    }
+
+    // Add other business methods as needed
+
 }

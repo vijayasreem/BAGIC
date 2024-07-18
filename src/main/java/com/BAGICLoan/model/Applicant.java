@@ -1,12 +1,7 @@
 
 package com.BAGICLoan.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "applicant")
@@ -16,13 +11,16 @@ public class Applicant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "annual_income")
-    private double annualIncome;
-
     @Column(name = "credit_score")
     private int creditScore;
 
-    // Getters and Setters
+    @Column(name = "loan_amount")
+    private double loanAmount;
+
+    @Column(name = "interest_rate")
+    private double interestRate;
+
+    // Add getters and setters
 
     public Long getId() {
         return id;
@@ -32,19 +30,27 @@ public class Applicant {
         this.id = id;
     }
 
-    public double getAnnualIncome() {
-        return annualIncome;
-    }
-
-    public void setAnnualIncome(double annualIncome) {
-        this.annualIncome = annualIncome;
-    }
-
     public int getCreditScore() {
         return creditScore;
     }
 
     public void setCreditScore(int creditScore) {
         this.creditScore = creditScore;
+    }
+
+    public double getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(double loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 }
