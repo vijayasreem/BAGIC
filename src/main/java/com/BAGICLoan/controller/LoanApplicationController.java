@@ -35,6 +35,6 @@ public class LoanApplicationController {
         return loanApplicationService.findByMobileAppChannel();
     }
 
-    // Add more endpoints for other business methods as needed
+    // Add more controller methods as needed
 
 }

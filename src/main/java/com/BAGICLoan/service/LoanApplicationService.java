@@ -29,6 +29,6 @@ public class LoanApplicationService {
         return loanApplicationRepository.findByMobileAppChannel();
     }
 
-    // Add more business methods as needed
+    // Add more service methods as needed
 
 }
