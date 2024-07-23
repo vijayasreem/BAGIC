@@ -17,19 +17,31 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
-    public Document saveDocument(Document document) {
-        return documentRepository.save(document);
+    public List<Document> findByApplicantId(Long applicantId) {
+        return documentRepository.findByApplicantId(applicantId);
     }
 
-    public Document findDocumentById(Long id) {
-        return documentRepository.findById(id).orElse(null);
+    public List<Document> findVerifiedDocuments() {
+        return documentRepository.findVerifiedDocuments();
     }
 
-    public Document findDocumentByDocumentName(String documentName) {
-        return documentRepository.findByDocumentName(documentName);
+    public List<Document> findFlaggedDocuments() {
+        return documentRepository.findFlaggedDocuments();
     }
 
-    public List<Document> findDocumentsByCreatedBy(String createdBy) {
-        return documentRepository.findByCreatedBy(createdBy);
+    public List<Document> findPendingDocuments() {
+        return documentRepository.findPendingDocuments();
+    }
+
+    public List<Document> findVerifiedDocumentsByApplicantId(Long applicantId) {
+        return documentRepository.findVerifiedDocumentsByApplicantId(applicantId);
+    }
+
+    public List<Document> findFlaggedDocumentsByApplicantId(Long applicantId) {
+        return documentRepository.findFlaggedDocumentsByApplicantId(applicantId);
+    }
+
+    public List<Document> findPendingDocumentsByApplicantId(Long applicantId) {
+        return documentRepository.findPendingDocumentsByApplicantId(applicantId);
     }
 }
