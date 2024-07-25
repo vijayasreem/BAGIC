@@ -9,15 +9,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.channel = 'in-person'")
-    List<LoanApplication> findByInPersonChannel();
+    @Query(value = "SELECT * FROM loan_application WHERE credit_check_status = 'APPROVED'", nativeQuery = true)
+    List<LoanApplication> findApprovedLoanApplications();
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.channel = 'website'")
-    List<LoanApplication> findByWebsiteChannel();
+    @Query(value = "SELECT * FROM loan_application WHERE document_verification_status = 'APPROVED'", nativeQuery = true)
+    List<LoanApplication> findApprovedDocumentVerifications();
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.channel = 'mobile app'")
-    List<LoanApplication> findByMobileAppChannel();
-
-    // Add more custom queries as needed
+    // Add more custom queries as per your requirements
 
 }

@@ -17,18 +17,14 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public List<LoanApplication> findByInPersonChannel() {
-        return loanApplicationRepository.findByInPersonChannel();
+    public List<LoanApplication> findApprovedLoanApplications() {
+        return loanApplicationRepository.findApprovedLoanApplications();
     }
 
-    public List<LoanApplication> findByWebsiteChannel() {
-        return loanApplicationRepository.findByWebsiteChannel();
+    public List<LoanApplication> findApprovedDocumentVerifications() {
+        return loanApplicationRepository.findApprovedDocumentVerifications();
     }
 
-    public List<LoanApplication> findByMobileAppChannel() {
-        return loanApplicationRepository.findByMobileAppChannel();
-    }
-
-    // Add more service methods as needed
+    // Add more business methods as per your requirements
 
 }

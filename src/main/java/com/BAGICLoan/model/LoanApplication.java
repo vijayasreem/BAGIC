@@ -13,9 +13,7 @@ public class LoanApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String channel;
-
-    // Add more fields as needed
+    // Add your entity attributes here
 
     public Long getId() {
         return id;
@@ -25,14 +23,6 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public String getChannel() {
-        return channel;
-    }
-
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    // Add getters and setters for other fields
+    // Add getters and setters for your entity attributes
 
 }

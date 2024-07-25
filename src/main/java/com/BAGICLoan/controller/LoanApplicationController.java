@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/loan-application")
+@RequestMapping("/loan-applications")
 public class LoanApplicationController {
 
     private final LoanApplicationService loanApplicationService;
@@ -20,21 +20,16 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/in-person")
-    public List<LoanApplication> getLoanApplicationsByInPersonChannel() {
-        return loanApplicationService.findByInPersonChannel();
+    @GetMapping("/approved")
+    public List<LoanApplication> getApprovedLoanApplications() {
+        return loanApplicationService.findApprovedLoanApplications();
     }
 
-    @GetMapping("/website")
-    public List<LoanApplication> getLoanApplicationsByWebsiteChannel() {
-        return loanApplicationService.findByWebsiteChannel();
+    @GetMapping("/document-verifications")
+    public List<LoanApplication> getApprovedDocumentVerifications() {
+        return loanApplicationService.findApprovedDocumentVerifications();
     }
 
-    @GetMapping("/mobile-app")
-    public List<LoanApplication> getLoanApplicationsByMobileAppChannel() {
-        return loanApplicationService.findByMobileAppChannel();
-    }
-
-    // Add more controller methods as needed
+    // Add more API endpoints for other business methods as per your requirements
 
 }
