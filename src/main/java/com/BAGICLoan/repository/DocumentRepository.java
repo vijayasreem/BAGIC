@@ -11,24 +11,18 @@ import java.util.List;
 @Repository
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 
-    @Query("SELECT d FROM Document d WHERE d.applicantId = ?1")
-    List<Document> findByApplicantId(Long applicantId);
+    @Query("SELECT d FROM Document d WHERE d.customerId = ?1")
+    List<Document> findByCustomerId(Long customerId);
 
-    @Query("SELECT d FROM Document d WHERE d.status = 'VERIFIED'")
-    List<Document> findVerifiedDocuments();
+    @Query("SELECT d FROM Document d WHERE d.customerId = ?1 AND d.documentType = ?2")
+    Document findByCustomerIdAndDocumentType(Long customerId, String documentType);
 
-    @Query("SELECT d FROM Document d WHERE d.status = 'FLAGGED'")
-    List<Document> findFlaggedDocuments();
+    @Query("SELECT d FROM Document d WHERE d.customerId = ?1 AND d.documentStatus = ?2")
+    List<Document> findByCustomerIdAndDocumentStatus(Long customerId, String documentStatus);
 
-    @Query("SELECT d FROM Document d WHERE d.status = 'PENDING'")
-    List<Document> findPendingDocuments();
+    @Query("SELECT d FROM Document d WHERE d.documentStatus = ?1")
+    List<Document> findByDocumentStatus(String documentStatus);
 
-    @Query("SELECT d FROM Document d WHERE d.status = 'VERIFIED' AND d.applicantId = ?1")
-    List<Document> findVerifiedDocumentsByApplicantId(Long applicantId);
-
-    @Query("SELECT d FROM Document d WHERE d.status = 'FLAGGED' AND d.applicantId = ?1")
-    List<Document> findFlaggedDocumentsByApplicantId(Long applicantId);
-
-    @Query("SELECT d FROM Document d WHERE d.status = 'PENDING' AND d.applicantId = ?1")
-    List<Document> findPendingDocumentsByApplicantId(Long applicantId);
+    @Query("SELECT d FROM Document d WHERE d.documentStatus = ?1 AND d.documentType = ?2")
+    List<Document> findByDocumentStatusAndDocumentType(String documentStatus, String documentType);
 }

@@ -1,3 +1,4 @@
+
 package com.BAGICLoan.service;
 
 import com.BAGICLoan.model.Document;
@@ -17,31 +18,23 @@ public class DocumentService {
         this.documentRepository = documentRepository;
     }
 
-    public List<Document> findByApplicantId(Long applicantId) {
-        return documentRepository.findByApplicantId(applicantId);
+    public List<Document> findByCustomerId(Long customerId) {
+        return documentRepository.findByCustomerId(customerId);
     }
 
-    public List<Document> findVerifiedDocuments() {
-        return documentRepository.findVerifiedDocuments();
+    public Document findByCustomerIdAndDocumentType(Long customerId, String documentType) {
+        return documentRepository.findByCustomerIdAndDocumentType(customerId, documentType);
     }
 
-    public List<Document> findFlaggedDocuments() {
-        return documentRepository.findFlaggedDocuments();
+    public List<Document> findByCustomerIdAndDocumentStatus(Long customerId, String documentStatus) {
+        return documentRepository.findByCustomerIdAndDocumentStatus(customerId, documentStatus);
     }
 
-    public List<Document> findPendingDocuments() {
-        return documentRepository.findPendingDocuments();
+    public List<Document> findByDocumentStatus(String documentStatus) {
+        return documentRepository.findByDocumentStatus(documentStatus);
     }
 
-    public List<Document> findVerifiedDocumentsByApplicantId(Long applicantId) {
-        return documentRepository.findVerifiedDocumentsByApplicantId(applicantId);
-    }
-
-    public List<Document> findFlaggedDocumentsByApplicantId(Long applicantId) {
-        return documentRepository.findFlaggedDocumentsByApplicantId(applicantId);
-    }
-
-    public List<Document> findPendingDocumentsByApplicantId(Long applicantId) {
-        return documentRepository.findPendingDocumentsByApplicantId(applicantId);
+    public List<Document> findByDocumentStatusAndDocumentType(String documentStatus, String documentType) {
+        return documentRepository.findByDocumentStatusAndDocumentType(documentStatus, documentType);
     }
 }

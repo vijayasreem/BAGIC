@@ -18,56 +18,30 @@ public class DocumentController {
         this.documentService = documentService;
     }
 
-    @GetMapping("/applicant/{applicantId}")
-    public List<Document> getDocumentsByApplicantId(@PathVariable Long applicantId) {
-        return documentService.findByApplicantId(applicantId);
+    @GetMapping("/customer/{customerId}")
+    public List<Document> getDocumentsByCustomerId(@PathVariable Long customerId) {
+        return documentService.findByCustomerId(customerId);
     }
 
-    @GetMapping("/verified")
-    public List<Document> getVerifiedDocuments() {
-        return documentService.findVerifiedDocuments();
+    @GetMapping("/customer/{customerId}/type/{documentType}")
+    public Document getDocumentByCustomerIdAndType(@PathVariable Long customerId, @PathVariable String documentType) {
+        return documentService.findByCustomerIdAndDocumentType(customerId, documentType);
     }
 
-    @GetMapping("/flagged")
-    public List<Document> getFlaggedDocuments() {
-        return documentService.findFlaggedDocuments();
+    @GetMapping("/customer/{customerId}/status/{documentStatus}")
+    public List<Document> getDocumentsByCustomerIdAndStatus(@PathVariable Long customerId, @PathVariable String documentStatus) {
+        return documentService.findByCustomerIdAndDocumentStatus(customerId, documentStatus);
     }
 
-    @GetMapping("/pending")
-    public List<Document> getPendingDocuments() {
-        return documentService.findPendingDocuments();
+    @GetMapping("/status/{documentStatus}")
+    public List<Document> getDocumentsByStatus(@PathVariable String documentStatus) {
+        return documentService.findByDocumentStatus(documentStatus);
     }
 
-    @GetMapping("/applicant/{applicantId}/verified")
-    public List<Document> getVerifiedDocumentsByApplicantId(@PathVariable Long applicantId) {
-        return documentService.findVerifiedDocumentsByApplicantId(applicantId);
+    @GetMapping("/status/{documentStatus}/type/{documentType}")
+    public List<Document> getDocumentsByStatusAndType(@PathVariable String documentStatus, @PathVariable String documentType) {
+        return documentService.findByDocumentStatusAndDocumentType(documentStatus, documentType);
     }
-
-    @GetMapping("/applicant/{applicantId}/flagged")
-    public List<Document> getFlaggedDocumentsByApplicantId(@PathVariable Long applicantId) {
-        return documentService.findFlaggedDocumentsByApplicantId(applicantId);
-    }
-
-    @GetMapping("/applicant/{applicantId}/pending")
-    public List<Document> getPendingDocumentsByApplicantId(@PathVariable Long applicantId) {
-        return documentService.findPendingDocumentsByApplicantId(applicantId);
-    }
-
-    @PostMapping
-    public Document uploadDocument(@RequestBody Document document) {
-        // Implement document upload logic here
-        return documentService.uploadDocument(document);
-    }
-
-    @PutMapping("/{documentId}")
-    public Document updateDocument(@PathVariable Long documentId, @RequestBody Document document) {
-        // Implement document update logic here
-        return documentService.updateDocument(documentId, document);
-    }
-
-    @DeleteMapping("/{documentId}")
-    public void deleteDocument(@PathVariable Long documentId) {
-        // Implement document deletion logic here
-        documentService.deleteDocument(documentId);
-    }
+    
+    // Add other required business methods and their implementations here
 }

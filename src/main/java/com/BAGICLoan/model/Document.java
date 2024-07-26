@@ -11,11 +11,14 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "applicant_id")
-    private Long applicantId;
+    @Column(name = "customer_id")
+    private Long customerId;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "document_type")
+    private String documentType;
+
+    @Column(name = "document_status")
+    private String documentStatus;
 
     // Getters and Setters
 
@@ -27,19 +30,27 @@ public class Document {
         this.id = id;
     }
 
-    public Long getApplicantId() {
-        return applicantId;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setApplicantId(Long applicantId) {
-        this.applicantId = applicantId;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getDocumentType() {
+        return documentType;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public String getDocumentStatus() {
+        return documentStatus;
+    }
+
+    public void setDocumentStatus(String documentStatus) {
+        this.documentStatus = documentStatus;
     }
 }
