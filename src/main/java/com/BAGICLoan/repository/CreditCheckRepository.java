@@ -1,29 +1,67 @@
 
 package com.BAGICLoan.repository;
 
-import com.BAGICLoan.model.Applicant;
+import com.BAGICLoan.model.CreditCheck;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CreditCheckRepository extends JpaRepository<Applicant, Long> {
+public interface CreditCheckRepository extends JpaRepository<CreditCheck, Long> {
 
-    @Query("SELECT a.creditScore FROM Applicant a WHERE a.id = :applicantId")
-    int getApplicantCreditScore(Long applicantId);
+    // Method to retrieve credit check by customer ID
+    CreditCheck findByCustomerId(Long customerId);
 
-    @Query("SELECT a.paymentHistory, a.outstandingDebts, a.creditUtilization FROM Applicant a WHERE a.id = :applicantId")
-    Object[] getApplicantFinancialHistory(Long applicantId);
+    // Method to retrieve credit check by channel
+    CreditCheck findByChannel(String channel);
 
-    @Query("SELECT a.creditworthinessScore FROM Applicant a WHERE a.id = :applicantId")
-    int getApplicantCreditworthinessScore(Long applicantId);
+    // Method to retrieve credit check by status
+    CreditCheck findByStatus(String status);
 
-    @Query("SELECT a.creditworthinessScore >= :threshold FROM Applicant a WHERE a.id = :applicantId")
-    boolean isApplicantCreditworthy(Long applicantId, int threshold);
+    // Method to retrieve credit check by completion time
+    CreditCheck findByCompletionTime(String completionTime);
 
-    @Query("SELECT a.isApproved FROM Applicant a WHERE a.id = :applicantId")
-    boolean isApplicantApproved(Long applicantId);
+    // Custom query to retrieve credit check by customer ID and channel
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.channel = ?2")
+    CreditCheck findByCustomerIdAndChannel(Long customerId, String channel);
 
-    @Query("SELECT a FROM Applicant a WHERE a.id = :applicantId")
-    Applicant findApplicantById(Long applicantId);
+    // Custom query to retrieve credit check by customer ID and status
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.status = ?2")
+    CreditCheck findByCustomerIdAndStatus(Long customerId, String status);
+
+    // Custom query to retrieve credit check by customer ID and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.completionTime = ?2")
+    CreditCheck findByCustomerIdAndCompletionTime(Long customerId, String completionTime);
+
+    // Custom query to retrieve credit check by channel and status
+    @Query("SELECT c FROM CreditCheck c WHERE c.channel = ?1 AND c.status = ?2")
+    CreditCheck findByChannelAndStatus(String channel, String status);
+
+    // Custom query to retrieve credit check by channel and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.channel = ?1 AND c.completionTime = ?2")
+    CreditCheck findByChannelAndCompletionTime(String channel, String completionTime);
+
+    // Custom query to retrieve credit check by status and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.status = ?1 AND c.completionTime = ?2")
+    CreditCheck findByStatusAndCompletionTime(String status, String completionTime);
+
+    // Custom query to retrieve credit check by customer ID, channel, and status
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.channel = ?2 AND c.status = ?3")
+    CreditCheck findByCustomerIdAndChannelAndStatus(Long customerId, String channel, String status);
+
+    // Custom query to retrieve credit check by customer ID, channel, and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.channel = ?2 AND c.completionTime = ?3")
+    CreditCheck findByCustomerIdAndChannelAndCompletionTime(Long customerId, String channel, String completionTime);
+
+    // Custom query to retrieve credit check by customer ID, status, and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.status = ?2 AND c.completionTime = ?3")
+    CreditCheck findByCustomerIdAndStatusAndCompletionTime(Long customerId, String status, String completionTime);
+
+    // Custom query to retrieve credit check by channel, status, and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.channel = ?1 AND c.status = ?2 AND c.completionTime = ?3")
+    CreditCheck findByChannelAndStatusAndCompletionTime(String channel, String status, String completionTime);
+
+    // Custom query to retrieve credit check by customer ID, channel, status, and completion time
+    @Query("SELECT c FROM CreditCheck c WHERE c.customerId = ?1 AND c.channel = ?2 AND c.status = ?3 AND c.completionTime = ?4")
+    CreditCheck findByCustomerIdAndChannelAndStatusAndCompletionTime(Long customerId, String channel, String status, String completionTime);
 }
