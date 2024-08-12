@@ -14,13 +14,22 @@ public class Applicant {
     @Column(name = "credit_score")
     private int creditScore;
 
-    @Column(name = "loan_amount")
-    private double loanAmount;
+    @Column(name = "payment_history")
+    private String paymentHistory;
 
-    @Column(name = "interest_rate")
-    private double interestRate;
+    @Column(name = "outstanding_debts")
+    private double outstandingDebts;
 
-    // Add getters and setters
+    @Column(name = "credit_utilization")
+    private double creditUtilization;
+
+    @Column(name = "creditworthiness_score")
+    private int creditworthinessScore;
+
+    @Column(name = "is_approved")
+    private boolean isApproved;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -38,19 +47,43 @@ public class Applicant {
         this.creditScore = creditScore;
     }
 
-    public double getLoanAmount() {
-        return loanAmount;
+    public String getPaymentHistory() {
+        return paymentHistory;
     }
 
-    public void setLoanAmount(double loanAmount) {
-        this.loanAmount = loanAmount;
+    public void setPaymentHistory(String paymentHistory) {
+        this.paymentHistory = paymentHistory;
     }
 
-    public double getInterestRate() {
-        return interestRate;
+    public double getOutstandingDebts() {
+        return outstandingDebts;
     }
 
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
+    public void setOutstandingDebts(double outstandingDebts) {
+        this.outstandingDebts = outstandingDebts;
+    }
+
+    public double getCreditUtilization() {
+        return creditUtilization;
+    }
+
+    public void setCreditUtilization(double creditUtilization) {
+        this.creditUtilization = creditUtilization;
+    }
+
+    public int getCreditworthinessScore() {
+        return creditworthinessScore;
+    }
+
+    public void setCreditworthinessScore(int creditworthinessScore) {
+        this.creditworthinessScore = creditworthinessScore;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 }
