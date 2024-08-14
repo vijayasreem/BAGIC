@@ -15,7 +15,6 @@ public class DocumentVerification {
 
     private boolean identityVerified;
     private boolean addressVerified;
-    private boolean eligibleForBankingServices;
     private int annualIncome;
     private int creditScore;
 
@@ -41,14 +40,6 @@ public class DocumentVerification {
 
     public void setAddressVerified(boolean addressVerified) {
         this.addressVerified = addressVerified;
-    }
-
-    public boolean isEligibleForBankingServices() {
-        return eligibleForBankingServices;
-    }
-
-    public void setEligibleForBankingServices(boolean eligibleForBankingServices) {
-        this.eligibleForBankingServices = eligibleForBankingServices;
     }
 
     public int getAnnualIncome() {

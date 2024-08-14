@@ -36,11 +36,8 @@ public class DocumentVerificationService {
         }
     }
 
-    public void determineEligibilityForBankingServices() {
-        boolean isIdentityVerified = documentVerificationRepository.isDocumentVerified();
-        boolean isIncompleteDocumentVerification = documentVerificationRepository.isIncompleteDocumentVerification();
-
-        if (isIdentityVerified && !isIncompleteDocumentVerification) {
+    public void determineEligibilityForBankingServices(String identityVerificationResult, String addressVerificationResult) {
+        if (identityVerificationResult.equals("yes") && addressVerificationResult.equals("yes")) {
             System.out.println("Congratulations! You are eligible for banking services.");
         } else {
             System.out.println("Incomplete document verification. You are not eligible for banking services.");
@@ -48,12 +45,9 @@ public class DocumentVerificationService {
     }
 
     public void validateCreditEvaluation(int annualIncome, int creditScore) {
-        boolean isEligibleForHighLimitCreditScore = documentVerificationRepository.isEligibleForHighLimitCreditScore();
-        boolean isEligibleForModerateLimitCreditScore = documentVerificationRepository.isEligibleForModerateLimitCreditScore();
-
-        if (annualIncome >= 30000 && creditScore >= 700 && isEligibleForHighLimitCreditScore) {
+        if (annualIncome >= 30000 && creditScore >= 700) {
             System.out.println("Congratulations! You are eligible for a high-limit credit score.");
-        } else if (annualIncome >= 20000 && creditScore >= 600 && isEligibleForModerateLimitCreditScore) {
+        } else if (annualIncome >= 20000 && creditScore >= 600) {
             System.out.println("You are eligible for a moderate-limit credit score.");
         } else {
             System.out.println("You are not eligible for a credit score.");
