@@ -1,5 +1,6 @@
 package com.BAGICLoan.service;
 
+import com.BAGICLoan.model.DocumentVerification;
 import com.BAGICLoan.repository.DocumentVerificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +58,9 @@ public class DocumentVerificationService {
     public void closeDocumentVerificationApp() {
         // Close any resources here
         System.out.println("Closing the Document Verification App. Goodbye!");
+    }
+
+    public DocumentVerification save(DocumentVerification documentVerification) {
+        return documentVerificationRepository.save(documentVerification);
     }
 }
