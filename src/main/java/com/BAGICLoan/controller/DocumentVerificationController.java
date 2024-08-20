@@ -1,12 +1,12 @@
 package com.BAGICLoan.controller;
 
-import com.BAGICLoan.model.DocumentVerification;
 import com.BAGICLoan.service.DocumentVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/document-verification")
 public class DocumentVerificationController {
 
     private final DocumentVerificationService documentVerificationService;
@@ -16,42 +16,33 @@ public class DocumentVerificationController {
         this.documentVerificationService = documentVerificationService;
     }
 
-    @GetMapping("/open-app")
-    public String openDocumentVerificationApp() {
+    @GetMapping("/openApp")
+    public void openDocumentVerificationApp() {
         documentVerificationService.openDocumentVerificationApp();
-        return "Welcome to the Document Verification App!";
     }
 
-    @PostMapping("/verify-identity")
-    public String verifyIdentity(@RequestParam String identity) {
+    @GetMapping("/verifyIdentity/{identity}")
+    public String verifyIdentity(@PathVariable String identity) {
         return documentVerificationService.verifyIdentity(identity);
     }
 
-    @PostMapping("/verify-address")
-    public String verifyAddress(@RequestParam String address) {
+    @GetMapping("/verifyAddress/{address}")
+    public String verifyAddress(@PathVariable String address) {
         return documentVerificationService.verifyAddress(address);
     }
 
-    @PostMapping("/determine-eligibility")
-    public String determineEligibilityForBankingServices(@RequestParam String identityVerificationResult, @RequestParam String addressVerificationResult) {
-        documentVerificationService.determineEligibilityForBankingServices(identityVerificationResult, addressVerificationResult);
-        return "Eligibility determination completed.";
+    @GetMapping("/determineEligibility")
+    public void determineEligibilityForBankingServices() {
+        documentVerificationService.determineEligibilityForBankingServices();
     }
 
-    @PostMapping("/validate-credit")
-    public String validateCreditEvaluation(@RequestParam int annualIncome, @RequestParam int creditScore) {
+    @GetMapping("/validateCredit/{annualIncome}/{creditScore}")
+    public void validateCreditEvaluation(@PathVariable int annualIncome, @PathVariable int creditScore) {
         documentVerificationService.validateCreditEvaluation(annualIncome, creditScore);
-        return "Credit evaluation completed.";
     }
 
-    @GetMapping("/close-app")
-    public String closeDocumentVerificationApp() {
+    @GetMapping("/closeApp")
+    public void closeDocumentVerificationApp() {
         documentVerificationService.closeDocumentVerificationApp();
-        return "Closing the Document Verification App. Goodbye!";
-    }
-
-    @PostMapping("/save")
-    public DocumentVerification saveDocumentVerification(@RequestBody DocumentVerification documentVerification) {
-        return documentVerificationService.save(documentVerification);
     }
 }

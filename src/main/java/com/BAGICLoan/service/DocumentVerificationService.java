@@ -1,6 +1,5 @@
 package com.BAGICLoan.service;
 
-import com.BAGICLoan.model.DocumentVerification;
 import com.BAGICLoan.repository.DocumentVerificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,8 +36,9 @@ public class DocumentVerificationService {
         }
     }
 
-    public void determineEligibilityForBankingServices(String identityVerificationResult, String addressVerificationResult) {
-        if (identityVerificationResult.equals("yes") && addressVerificationResult.equals("yes")) {
+    public void determineEligibilityForBankingServices() {
+        boolean isEligible = documentVerificationRepository.isEligibleForBankingServices();
+        if (isEligible) {
             System.out.println("Congratulations! You are eligible for banking services.");
         } else {
             System.out.println("Incomplete document verification. You are not eligible for banking services.");
@@ -56,11 +56,7 @@ public class DocumentVerificationService {
     }
 
     public void closeDocumentVerificationApp() {
-        // Close any resources here
+        // Perform cleanup and resource closing logic here
         System.out.println("Closing the Document Verification App. Goodbye!");
-    }
-
-    public DocumentVerification save(DocumentVerification documentVerification) {
-        return documentVerificationRepository.save(documentVerification);
     }
 }
