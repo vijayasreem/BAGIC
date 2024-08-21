@@ -1,3 +1,4 @@
+
 package com.BAGICLoan.model;
 
 import javax.persistence.Entity;
@@ -16,8 +17,6 @@ public class DocumentVerification {
     private boolean addressVerified;
     private double annualIncome;
     private int creditScore;
-
-    // getters and setters
 
     public Long getId() {
         return id;

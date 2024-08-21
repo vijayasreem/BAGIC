@@ -31,9 +31,9 @@ public class DocumentVerificationController {
         return documentVerificationService.verifyAddress(address);
     }
 
-    @GetMapping("/determineEligibility")
-    public void determineEligibilityForBankingServices() {
-        documentVerificationService.determineEligibilityForBankingServices();
+    @GetMapping("/determineEligibility/{identityVerificationResult}/{addressVerificationResult}")
+    public void determineEligibilityForBankingServices(@PathVariable String identityVerificationResult, @PathVariable String addressVerificationResult) {
+        documentVerificationService.determineEligibilityForBankingServices(identityVerificationResult, addressVerificationResult);
     }
 
     @GetMapping("/validateCredit/{annualIncome}/{creditScore}")
