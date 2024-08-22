@@ -20,31 +20,24 @@ public class DocumentVerificationService {
 
     public String verifyIdentity(String identity) {
         // Perform identity verification logic here
-        if (identity.equals("verified")) {
-            return "yes";
-        } else {
-            return "no";
-        }
+        // Return "yes" or "no" based on verification result
     }
 
     public String verifyAddress(String address) {
         // Perform address verification logic here
-        if (address.equals("verified")) {
-            return "yes";
-        } else {
-            return "no";
-        }
+        // Return "yes" or "no" based on verification result
     }
 
-    public void determineEligibilityForBankingServices(String identityVerificationResult, String addressVerificationResult) {
-        if (identityVerificationResult.equals("yes") && addressVerificationResult.equals("yes")) {
+    public void determineEligibilityForBankingServices() {
+        boolean isEligible = documentVerificationRepository.isEligibleForBankingServices();
+        if (isEligible) {
             System.out.println("Congratulations! You are eligible for banking services.");
         } else {
             System.out.println("Incomplete document verification. You are not eligible for banking services.");
         }
     }
 
-    public void validateCreditEvaluation(int annualIncome, int creditScore) {
+    public void determineCreditEvaluation(double annualIncome, int creditScore) {
         if (annualIncome >= 30000 && creditScore >= 700) {
             System.out.println("Congratulations! You are eligible for a high-limit credit score.");
         } else if (annualIncome >= 20000 && creditScore >= 600) {
@@ -55,7 +48,7 @@ public class DocumentVerificationService {
     }
 
     public void closeDocumentVerificationApp() {
-        // Close any resources here
-        System.out.println("Closing the Document Verification App. Goodbye!");
+        // Close any resources used by the application
+        // For example, close Scanner object if used
     }
 }
