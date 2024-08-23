@@ -15,7 +15,7 @@ public class DocumentVerification {
 
     private boolean identityVerified;
     private boolean addressVerified;
-    private double annualIncome;
+    private int annualIncome;
     private int creditScore;
 
     public Long getId() {
@@ -42,11 +42,11 @@ public class DocumentVerification {
         this.addressVerified = addressVerified;
     }
 
-    public double getAnnualIncome() {
+    public int getAnnualIncome() {
         return annualIncome;
     }
 
-    public void setAnnualIncome(double annualIncome) {
+    public void setAnnualIncome(int annualIncome) {
         this.annualIncome = annualIncome;
     }
 
