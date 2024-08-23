@@ -20,12 +20,20 @@ public class DocumentVerificationService {
 
     public String verifyIdentity(String identity) {
         // Perform identity verification logic here
-        // Return "yes" or "no" based on verification result
+        if (identity.equals("verified")) {
+            return "yes";
+        } else {
+            return "no";
+        }
     }
 
     public String verifyAddress(String address) {
         // Perform address verification logic here
-        // Return "yes" or "no" based on verification result
+        if (address.equals("verified")) {
+            return "yes";
+        } else {
+            return "no";
+        }
     }
 
     public void determineEligibilityForBankingServices() {
@@ -37,7 +45,7 @@ public class DocumentVerificationService {
         }
     }
 
-    public void determineCreditEvaluation(double annualIncome, int creditScore) {
+    public void validateCreditEvaluation(int annualIncome, int creditScore) {
         if (annualIncome >= 30000 && creditScore >= 700) {
             System.out.println("Congratulations! You are eligible for a high-limit credit score.");
         } else if (annualIncome >= 20000 && creditScore >= 600) {
@@ -48,7 +56,7 @@ public class DocumentVerificationService {
     }
 
     public void closeDocumentVerificationApp() {
-        // Close any resources used by the application
-        // For example, close Scanner object if used
+        // Close any resources here
+        System.out.println("Closing the Document Verification App. Goodbye!");
     }
 }

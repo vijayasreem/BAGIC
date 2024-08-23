@@ -35,18 +35,18 @@ public class DocumentVerificationController {
     @GetMapping("/determineEligibility")
     public String determineEligibilityForBankingServices() {
         documentVerificationService.determineEligibilityForBankingServices();
-        return "Eligibility determination completed.";
+        return "Eligibility determined for banking services.";
     }
 
-    @GetMapping("/determineCreditEvaluation/{annualIncome}/{creditScore}")
-    public String determineCreditEvaluation(@PathVariable double annualIncome, @PathVariable int creditScore) {
-        documentVerificationService.determineCreditEvaluation(annualIncome, creditScore);
-        return "Credit evaluation completed.";
+    @GetMapping("/validateCredit/{annualIncome}/{creditScore}")
+    public String validateCreditEvaluation(@PathVariable int annualIncome, @PathVariable int creditScore) {
+        documentVerificationService.validateCreditEvaluation(annualIncome, creditScore);
+        return "Credit evaluation validated.";
     }
 
     @GetMapping("/closeApp")
     public String closeDocumentVerificationApp() {
         documentVerificationService.closeDocumentVerificationApp();
-        return "Document Verification App closed.";
+        return "Closing the Document Verification App. Goodbye!";
     }
 }
