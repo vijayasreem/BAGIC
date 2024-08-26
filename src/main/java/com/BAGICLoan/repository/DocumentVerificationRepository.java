@@ -12,7 +12,7 @@ public interface DocumentVerificationRepository extends JpaRepository<DocumentVe
     @Query("SELECT CASE WHEN COUNT(d) > 0 THEN true ELSE false END FROM DocumentVerification d WHERE d.identityVerified = true AND d.addressVerified = true")
     boolean isEligibleForBankingServices();
 
-    @Query("SELECT CASE WHEN COUNT(d) > 0 THEN true ELSE false END FROM DocumentVerification d WHERE (d.identityVerified = false OR d.addressVerified = false)")
+    @Query("SELECT CASE WHEN COUNT(d) > 0 THEN true ELSE false END FROM DocumentVerification d WHERE d.identityVerified = false OR d.addressVerified = false")
     boolean isIncompleteDocumentVerification();
 
     @Query("SELECT CASE WHEN COUNT(d) > 0 THEN true ELSE false END FROM DocumentVerification d WHERE d.annualIncome >= 30000 AND d.creditScore >= 700")
@@ -20,5 +20,4 @@ public interface DocumentVerificationRepository extends JpaRepository<DocumentVe
 
     @Query("SELECT CASE WHEN COUNT(d) > 0 THEN true ELSE false END FROM DocumentVerification d WHERE d.annualIncome >= 20000 AND d.creditScore >= 600")
     boolean isEligibleForModerateLimitCreditScore();
-
 }
