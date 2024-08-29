@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CaseRepository extends JpaRepository<Case, Long> {
 
-    @Query("SELECT c FROM Case c WHERE c.caseNumber = :caseNumber AND c.caseYear = :caseYear")
-    Case findByCaseNumberAndCaseYear(String caseNumber, int caseYear);
+    @Query("SELECT c FROM Case c WHERE c.caseNumber = ?1 AND c.caseYear = ?2")
+    Case findByCaseNumberAndYear(String caseNumber, int caseYear);
 
-    @Query("SELECT c FROM Case c WHERE c.courtLocation = :courtLocation")
+    @Query("SELECT c FROM Case c WHERE c.courtLocation = ?1")
     List<Case> findByCourtLocation(String courtLocation);
 
-    @Query("SELECT c FROM Case c WHERE c.status = :status")
+    @Query("SELECT c FROM Case c WHERE c.status = ?1")
     List<Case> findByStatus(String status);
 
     // Add more custom queries as needed

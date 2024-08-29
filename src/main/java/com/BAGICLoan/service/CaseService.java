@@ -17,8 +17,8 @@ public class CaseService {
         this.caseRepository = caseRepository;
     }
 
-    public Case findByCaseNumberAndCaseYear(String caseNumber, int caseYear) {
-        return caseRepository.findByCaseNumberAndCaseYear(caseNumber, caseYear);
+    public Case findByCaseNumberAndYear(String caseNumber, int caseYear) {
+        return caseRepository.findByCaseNumberAndYear(caseNumber, caseYear);
     }
 
     public List<Case> findByCourtLocation(String courtLocation) {

@@ -19,8 +19,8 @@ public class CaseController {
     }
 
     @GetMapping("/{caseNumber}/{caseYear}")
-    public Case findByCaseNumberAndCaseYear(@PathVariable String caseNumber, @PathVariable int caseYear) {
-        return caseService.findByCaseNumberAndCaseYear(caseNumber, caseYear);
+    public Case findByCaseNumberAndYear(@PathVariable String caseNumber, @PathVariable int caseYear) {
+        return caseService.findByCaseNumberAndYear(caseNumber, caseYear);
     }
 
     @GetMapping("/courtLocation/{courtLocation}")
