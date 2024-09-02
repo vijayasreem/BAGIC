@@ -36,9 +36,8 @@ public class DocumentVerificationService {
         }
     }
 
-    public void determineEligibilityForBankingServices() {
-        boolean isEligible = documentVerificationRepository.isEligibleForBankingServices();
-        if (isEligible) {
+    public void determineEligibilityForBankingServices(String identityVerificationResult, String addressVerificationResult) {
+        if (identityVerificationResult.equals("yes") && addressVerificationResult.equals("yes")) {
             System.out.println("Congratulations! You are eligible for banking services.");
         } else {
             System.out.println("Incomplete document verification. You are not eligible for banking services.");

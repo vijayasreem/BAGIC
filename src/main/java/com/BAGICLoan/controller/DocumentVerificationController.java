@@ -17,9 +17,8 @@ public class DocumentVerificationController {
     }
 
     @GetMapping("/openApp")
-    public String openDocumentVerificationApp() {
+    public void openDocumentVerificationApp() {
         documentVerificationService.openDocumentVerificationApp();
-        return "Welcome to the Document Verification App!";
     }
 
     @GetMapping("/verifyIdentity/{identity}")
@@ -32,21 +31,18 @@ public class DocumentVerificationController {
         return documentVerificationService.verifyAddress(address);
     }
 
-    @GetMapping("/determineEligibility")
-    public String determineEligibilityForBankingServices() {
-        documentVerificationService.determineEligibilityForBankingServices();
-        return "Eligibility determined for banking services.";
+    @GetMapping("/determineEligibility/{identityVerificationResult}/{addressVerificationResult}")
+    public void determineEligibilityForBankingServices(@PathVariable String identityVerificationResult, @PathVariable String addressVerificationResult) {
+        documentVerificationService.determineEligibilityForBankingServices(identityVerificationResult, addressVerificationResult);
     }
 
     @GetMapping("/validateCredit/{annualIncome}/{creditScore}")
-    public String validateCreditEvaluation(@PathVariable int annualIncome, @PathVariable int creditScore) {
+    public void validateCreditEvaluation(@PathVariable int annualIncome, @PathVariable int creditScore) {
         documentVerificationService.validateCreditEvaluation(annualIncome, creditScore);
-        return "Credit evaluation validated.";
     }
 
     @GetMapping("/closeApp")
-    public String closeDocumentVerificationApp() {
+    public void closeDocumentVerificationApp() {
         documentVerificationService.closeDocumentVerificationApp();
-        return "Closing the Document Verification App. Goodbye!";
     }
 }
