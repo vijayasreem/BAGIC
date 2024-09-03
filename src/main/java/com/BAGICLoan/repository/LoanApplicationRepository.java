@@ -9,95 +9,43 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {
 
-    // Query to get loan applications by channel
-    @Query("SELECT la FROM LoanApplication la WHERE la.channel = ?1")
-    List<LoanApplication> findByChannel(String channel);
+    // Method for validating completeness of required fields
+    boolean existsByField1AndField2AndField3NotNull(String field1, String field2, String field3);
 
-    // Query to get loan applications by status
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = ?1")
+    // Method for validating email format
+    boolean existsByEmailRegex(String email);
+
+    // Method for validating phone number format
+    boolean existsByPhoneNumberRegex(String phoneNumber);
+
+    // Method for validating correct file type and size
+    boolean existsByDocumentTypeAndDocumentSize(String documentType, long documentSize);
+
+    // Method for retrieving loan application data by status
     List<LoanApplication> findByStatus(String status);
 
-    // Query to get loan applications by customer ID
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1")
-    List<LoanApplication> findByCustomerId(Long customerId);
+    // Method for retrieving loan application data by user ID
+    List<LoanApplication> findByUserId(Long userId);
 
-    // Query to get loan applications by loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.loanAmount >= ?1 AND la.loanAmount <= ?2")
-    List<LoanApplication> findByLoanAmountRange(Double minAmount, Double maxAmount);
+    // Method for retrieving loan application data by document type
+    List<LoanApplication> findByDocumentType(String documentType);
 
-    // Query to get loan applications by approval status
-    @Query("SELECT la FROM LoanApplication la WHERE la.approvalStatus = ?1")
-    List<LoanApplication> findByApprovalStatus(String approvalStatus);
+    // Method for retrieving loan application data by document type and status
+    List<LoanApplication> findByDocumentTypeAndStatus(String documentType, String status);
 
-    // Query to get loan applications by disbursement status
-    @Query("SELECT la FROM LoanApplication la WHERE la.disbursementStatus = ?1")
-    List<LoanApplication> findByDisbursementStatus(String disbursementStatus);
+    // Method for retrieving loan application data by document type and user ID
+    List<LoanApplication> findByDocumentTypeAndUserId(String documentType, Long userId);
 
-    // Query to get loan applications by customer ID and status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2")
-    List<LoanApplication> findByCustomerIdAndStatus(Long customerId, String status);
+    // Method for retrieving loan application data by document type, status, and user ID
+    List<LoanApplication> findByDocumentTypeAndStatusAndUserId(String documentType, String status, Long userId);
 
-    // Query to get loan applications by customer ID and approval status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.approvalStatus = ?2")
-    List<LoanApplication> findByCustomerIdAndApprovalStatus(Long customerId, String approvalStatus);
+    // Method for retrieving loan application data by document type, status, and user ID with pagination
+    Page<LoanApplication> findByDocumentTypeAndStatusAndUserId(String documentType, String status, Long userId, Pageable pageable);
 
-    // Query to get loan applications by customer ID and disbursement status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.disbursementStatus = ?2")
-    List<LoanApplication> findByCustomerIdAndDisbursementStatus(Long customerId, String disbursementStatus);
+    // Method for retrieving loan application data by document type, status, and user ID with sorting
+    List<LoanApplication> findByDocumentTypeAndStatusAndUserIdOrderByField1Asc(String documentType, String status, Long userId);
 
-    // Query to get loan applications by customer ID and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.loanAmount >= ?2 AND la.loanAmount <= ?3")
-    List<LoanApplication> findByCustomerIdAndLoanAmountRange(Long customerId, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID and channel
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.channel = ?2")
-    List<LoanApplication> findByCustomerIdAndChannel(Long customerId, String channel);
-
-    // Query to get loan applications by customer ID, status, and approval status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.approvalStatus = ?3")
-    List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatus(Long customerId, String status, String approvalStatus);
-
-    // Query to get loan applications by customer ID, status, and disbursement status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.disbursementStatus = ?3")
-    List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatus(Long customerId, String status, String disbursementStatus);
-
-    // Query to get loan applications by customer ID, status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.loanAmount >= ?3 AND la.loanAmount <= ?4")
-    List<LoanApplication> findByCustomerIdAndStatusAndLoanAmountRange(Long customerId, String status, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, approval status, and disbursement status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.approvalStatus = ?2 AND la.disbursementStatus = ?3")
-    List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatus(Long customerId, String approvalStatus, String disbursementStatus);
-
-    // Query to get loan applications by customer ID, approval status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.approvalStatus = ?2 AND la.loanAmount >= ?3 AND la.loanAmount <= ?4")
-    List<LoanApplication> findByCustomerIdAndApprovalStatusAndLoanAmountRange(Long customerId, String approvalStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, disbursement status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.disbursementStatus = ?2 AND la.loanAmount >= ?3 AND la.loanAmount <= ?4")
-    List<LoanApplication> findByCustomerIdAndDisbursementStatusAndLoanAmountRange(Long customerId, String disbursementStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, status, approval status, and disbursement status
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.approvalStatus = ?3 AND la.disbursementStatus = ?4")
-    List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatus(Long customerId, String status, String approvalStatus, String disbursementStatus);
-
-    // Query to get loan applications by customer ID, status, approval status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.approvalStatus = ?3 AND la.loanAmount >= ?4 AND la.loanAmount <= ?5")
-    List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndLoanAmountRange(Long customerId, String status, String approvalStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, status, disbursement status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.disbursementStatus = ?3 AND la.loanAmount >= ?4 AND la.loanAmount <= ?5")
-    List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String status, String disbursementStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, approval status, disbursement status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.approvalStatus = ?2 AND la.disbursementStatus = ?3 AND la.loanAmount >= ?4 AND la.loanAmount <= ?5")
-    List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by status, approval status, disbursement status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = ?1 AND la.approvalStatus = ?2 AND la.disbursementStatus = ?3 AND la.loanAmount >= ?4 AND la.loanAmount <= ?5")
-    List<LoanApplication> findByStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(String status, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount);
-
-    // Query to get loan applications by customer ID, status, approval status, disbursement status, and loan amount range
-    @Query("SELECT la FROM LoanApplication la WHERE la.customerId = ?1 AND la.status = ?2 AND la.approvalStatus = ?3 AND la.disbursementStatus = ?4 AND la.loanAmount >= ?5 AND la.loanAmount <= ?6")
-    List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String status, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount);
+    // Custom query example
+    @Query("SELECT la FROM LoanApplication la WHERE la.field1 = ?1 AND la.field2 = ?2")
+    List<LoanApplication> findByField1AndField2(String field1, String field2);
 }

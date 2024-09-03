@@ -3,6 +3,8 @@ package com.BAGICLoan.controller;
 import com.BAGICLoan.model.LoanApplication;
 import com.BAGICLoan.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,118 +20,68 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/channel/{channel}")
-    public List<LoanApplication> findByChannel(@PathVariable String channel) {
-        return loanApplicationService.findByChannel(channel);
+    @PostMapping("/validate/required-fields")
+    public boolean validateRequiredFields(@RequestParam String field1, @RequestParam String field2, @RequestParam String field3) {
+        return loanApplicationService.validateRequiredFields(field1, field2, field3);
+    }
+
+    @PostMapping("/validate/email-format")
+    public boolean validateEmailFormat(@RequestParam String email) {
+        return loanApplicationService.validateEmailFormat(email);
+    }
+
+    @PostMapping("/validate/phone-number-format")
+    public boolean validatePhoneNumberFormat(@RequestParam String phoneNumber) {
+        return loanApplicationService.validatePhoneNumberFormat(phoneNumber);
+    }
+
+    @PostMapping("/validate/document-type-and-size")
+    public boolean validateDocumentTypeAndSize(@RequestParam String documentType, @RequestParam long documentSize) {
+        return loanApplicationService.validateDocumentTypeAndSize(documentType, documentSize);
     }
 
     @GetMapping("/status/{status}")
-    public List<LoanApplication> findByStatus(@PathVariable String status) {
-        return loanApplicationService.findByStatus(status);
+    public List<LoanApplication> getLoanApplicationsByStatus(@PathVariable String status) {
+        return loanApplicationService.getLoanApplicationsByStatus(status);
     }
 
-    @GetMapping("/customer/{customerId}")
-    public List<LoanApplication> findByCustomerId(@PathVariable Long customerId) {
-        return loanApplicationService.findByCustomerId(customerId);
+    @GetMapping("/user/{userId}")
+    public List<LoanApplication> getLoanApplicationsByUserId(@PathVariable Long userId) {
+        return loanApplicationService.getLoanApplicationsByUserId(userId);
     }
 
-    @GetMapping("/loan-amount-range")
-    public List<LoanApplication> findByLoanAmountRange(@RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByLoanAmountRange(minAmount, maxAmount);
+    @GetMapping("/document-type/{documentType}")
+    public List<LoanApplication> getLoanApplicationsByDocumentType(@PathVariable String documentType) {
+        return loanApplicationService.getLoanApplicationsByDocumentType(documentType);
     }
 
-    @GetMapping("/approval-status/{approvalStatus}")
-    public List<LoanApplication> findByApprovalStatus(@PathVariable String approvalStatus) {
-        return loanApplicationService.findByApprovalStatus(approvalStatus);
+    @GetMapping("/document-type/{documentType}/status/{status}")
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatus(@PathVariable String documentType, @PathVariable String status) {
+        return loanApplicationService.getLoanApplicationsByDocumentTypeAndStatus(documentType, status);
     }
 
-    @GetMapping("/disbursement-status/{disbursementStatus}")
-    public List<LoanApplication> findByDisbursementStatus(@PathVariable String disbursementStatus) {
-        return loanApplicationService.findByDisbursementStatus(disbursementStatus);
+    @GetMapping("/document-type/{documentType}/user/{userId}")
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndUserId(@PathVariable String documentType, @PathVariable Long userId) {
+        return loanApplicationService.getLoanApplicationsByDocumentTypeAndUserId(documentType, userId);
     }
 
-    @GetMapping("/customer/{customerId}/status/{status}")
-    public List<LoanApplication> findByCustomerIdAndStatus(@PathVariable Long customerId, @PathVariable String status) {
-        return loanApplicationService.findByCustomerIdAndStatus(customerId, status);
+    @GetMapping("/document-type/{documentType}/status/{status}/user/{userId}")
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserId(@PathVariable String documentType, @PathVariable String status, @PathVariable Long userId) {
+        return loanApplicationService.getLoanApplicationsByDocumentTypeAndStatusAndUserId(documentType, status, userId);
     }
 
-    @GetMapping("/customer/{customerId}/approval-status/{approvalStatus}")
-    public List<LoanApplication> findByCustomerIdAndApprovalStatus(@PathVariable Long customerId, @PathVariable String approvalStatus) {
-        return loanApplicationService.findByCustomerIdAndApprovalStatus(customerId, approvalStatus);
+    @GetMapping("/document-type/{documentType}/status/{status}/user/{userId}/page")
+    public Page<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithPagination(@PathVariable String documentType, @PathVariable String status, @PathVariable Long userId, Pageable pageable) {
+        return loanApplicationService.getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithPagination(documentType, status, userId, pageable);
     }
 
-    @GetMapping("/customer/{customerId}/disbursement-status/{disbursementStatus}")
-    public List<LoanApplication> findByCustomerIdAndDisbursementStatus(@PathVariable Long customerId, @PathVariable String disbursementStatus) {
-        return loanApplicationService.findByCustomerIdAndDisbursementStatus(customerId, disbursementStatus);
+    @GetMapping("/document-type/{documentType}/status/{status}/user/{userId}/sort")
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithSorting(@PathVariable String documentType, @PathVariable String status, @PathVariable Long userId) {
+        return loanApplicationService.getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithSorting(documentType, status, userId);
     }
 
-    @GetMapping("/customer/{customerId}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndLoanAmountRange(@PathVariable Long customerId, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndLoanAmountRange(customerId, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/channel/{channel}")
-    public List<LoanApplication> findByCustomerIdAndChannel(@PathVariable Long customerId, @PathVariable String channel) {
-        return loanApplicationService.findByCustomerIdAndChannel(customerId, channel);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/approval-status/{approvalStatus}")
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatus(@PathVariable Long customerId, @PathVariable String status, @PathVariable String approvalStatus) {
-        return loanApplicationService.findByCustomerIdAndStatusAndApprovalStatus(customerId, status, approvalStatus);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/disbursement-status/{disbursementStatus}")
-    public List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatus(@PathVariable Long customerId, @PathVariable String status, @PathVariable String disbursementStatus) {
-        return loanApplicationService.findByCustomerIdAndStatusAndDisbursementStatus(customerId, status, disbursementStatus);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String status, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndStatusAndLoanAmountRange(customerId, status, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/approval-status/{approvalStatus}/disbursement-status/{disbursementStatus}")
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatus(@PathVariable Long customerId, @PathVariable String approvalStatus, @PathVariable String disbursementStatus) {
-        return loanApplicationService.findByCustomerIdAndApprovalStatusAndDisbursementStatus(customerId, approvalStatus, disbursementStatus);
-    }
-
-    @GetMapping("/customer/{customerId}/approval-status/{approvalStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String approvalStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndApprovalStatusAndLoanAmountRange(customerId, approvalStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/disbursement-status/{disbursementStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndDisbursementStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String disbursementStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndDisbursementStatusAndLoanAmountRange(customerId, disbursementStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/approval-status/{approvalStatus}/disbursement-status/{disbursementStatus}")
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatus(@PathVariable Long customerId, @PathVariable String status, @PathVariable String approvalStatus, @PathVariable String disbursementStatus) {
-        return loanApplicationService.findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatus(customerId, status, approvalStatus, disbursementStatus);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/approval-status/{approvalStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String status, @PathVariable String approvalStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndStatusAndApprovalStatusAndLoanAmountRange(customerId, status, approvalStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/disbursement-status/{disbursementStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String status, @PathVariable String disbursementStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndStatusAndDisbursementStatusAndLoanAmountRange(customerId, status, disbursementStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/approval-status/{approvalStatus}/disbursement-status/{disbursementStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String approvalStatus, @PathVariable String disbursementStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(customerId, approvalStatus, disbursementStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/status/{status}/approval-status/{approvalStatus}/disbursement-status/{disbursementStatus}/loan-amount-range")
-    public List<LoanApplication> findByStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(@PathVariable String status, @PathVariable String approvalStatus, @PathVariable String disbursementStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(status, approvalStatus, disbursementStatus, minAmount, maxAmount);
-    }
-
-    @GetMapping("/customer/{customerId}/status/{status}/approval-status/{approvalStatus}/disbursement-status/{disbursementStatus}/loan-amount-range")
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(@PathVariable Long customerId, @PathVariable String status, @PathVariable String approvalStatus, @PathVariable String disbursementStatus, @RequestParam("minAmount") Double minAmount, @RequestParam("maxAmount") Double maxAmount) {
-        return loanApplicationService.findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(customerId, status, approvalStatus, disbursementStatus, minAmount, maxAmount);
+    @GetMapping("/field1/{field1}/field2/{field2}")
+    public List<LoanApplication> getLoanApplicationsByField1AndField2(@PathVariable String field1, @PathVariable String field2) {
+        return loanApplicationService.getLoanApplicationsByField1AndField2(field1, field2);
     }
 }

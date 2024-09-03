@@ -3,6 +3,8 @@ package com.BAGICLoan.service;
 import com.BAGICLoan.model.LoanApplication;
 import com.BAGICLoan.repository.LoanApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,95 +19,55 @@ public class LoanApplicationService {
         this.loanApplicationRepository = loanApplicationRepository;
     }
 
-    public List<LoanApplication> findByChannel(String channel) {
-        return loanApplicationRepository.findByChannel(channel);
+    public boolean validateRequiredFields(String field1, String field2, String field3) {
+        return loanApplicationRepository.existsByField1AndField2AndField3NotNull(field1, field2, field3);
     }
 
-    public List<LoanApplication> findByStatus(String status) {
+    public boolean validateEmailFormat(String email) {
+        return loanApplicationRepository.existsByEmailRegex(email);
+    }
+
+    public boolean validatePhoneNumberFormat(String phoneNumber) {
+        return loanApplicationRepository.existsByPhoneNumberRegex(phoneNumber);
+    }
+
+    public boolean validateDocumentTypeAndSize(String documentType, long documentSize) {
+        return loanApplicationRepository.existsByDocumentTypeAndDocumentSize(documentType, documentSize);
+    }
+
+    public List<LoanApplication> getLoanApplicationsByStatus(String status) {
         return loanApplicationRepository.findByStatus(status);
     }
 
-    public List<LoanApplication> findByCustomerId(Long customerId) {
-        return loanApplicationRepository.findByCustomerId(customerId);
+    public List<LoanApplication> getLoanApplicationsByUserId(Long userId) {
+        return loanApplicationRepository.findByUserId(userId);
     }
 
-    public List<LoanApplication> findByLoanAmountRange(Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByLoanAmountRange(minAmount, maxAmount);
+    public List<LoanApplication> getLoanApplicationsByDocumentType(String documentType) {
+        return loanApplicationRepository.findByDocumentType(documentType);
     }
 
-    public List<LoanApplication> findByApprovalStatus(String approvalStatus) {
-        return loanApplicationRepository.findByApprovalStatus(approvalStatus);
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatus(String documentType, String status) {
+        return loanApplicationRepository.findByDocumentTypeAndStatus(documentType, status);
     }
 
-    public List<LoanApplication> findByDisbursementStatus(String disbursementStatus) {
-        return loanApplicationRepository.findByDisbursementStatus(disbursementStatus);
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndUserId(String documentType, Long userId) {
+        return loanApplicationRepository.findByDocumentTypeAndUserId(documentType, userId);
     }
 
-    public List<LoanApplication> findByCustomerIdAndStatus(Long customerId, String status) {
-        return loanApplicationRepository.findByCustomerIdAndStatus(customerId, status);
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserId(String documentType, String status, Long userId) {
+        return loanApplicationRepository.findByDocumentTypeAndStatusAndUserId(documentType, status, userId);
     }
 
-    public List<LoanApplication> findByCustomerIdAndApprovalStatus(Long customerId, String approvalStatus) {
-        return loanApplicationRepository.findByCustomerIdAndApprovalStatus(customerId, approvalStatus);
+    public Page<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithPagination(String documentType, String status, Long userId, Pageable pageable) {
+        return loanApplicationRepository.findByDocumentTypeAndStatusAndUserId(documentType, status, userId, pageable);
     }
 
-    public List<LoanApplication> findByCustomerIdAndDisbursementStatus(Long customerId, String disbursementStatus) {
-        return loanApplicationRepository.findByCustomerIdAndDisbursementStatus(customerId, disbursementStatus);
+    public List<LoanApplication> getLoanApplicationsByDocumentTypeAndStatusAndUserIdWithSorting(String documentType, String status, Long userId) {
+        return loanApplicationRepository.findByDocumentTypeAndStatusAndUserIdOrderByField1Asc(documentType, status, userId);
     }
 
-    public List<LoanApplication> findByCustomerIdAndLoanAmountRange(Long customerId, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndLoanAmountRange(customerId, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndChannel(Long customerId, String channel) {
-        return loanApplicationRepository.findByCustomerIdAndChannel(customerId, channel);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatus(Long customerId, String status, String approvalStatus) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndApprovalStatus(customerId, status, approvalStatus);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatus(Long customerId, String status, String disbursementStatus) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndDisbursementStatus(customerId, status, disbursementStatus);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndLoanAmountRange(Long customerId, String status, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndLoanAmountRange(customerId, status, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatus(Long customerId, String approvalStatus, String disbursementStatus) {
-        return loanApplicationRepository.findByCustomerIdAndApprovalStatusAndDisbursementStatus(customerId, approvalStatus, disbursementStatus);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndLoanAmountRange(Long customerId, String approvalStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndApprovalStatusAndLoanAmountRange(customerId, approvalStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndDisbursementStatusAndLoanAmountRange(Long customerId, String disbursementStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndDisbursementStatusAndLoanAmountRange(customerId, disbursementStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatus(Long customerId, String status, String approvalStatus, String disbursementStatus) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatus(customerId, status, approvalStatus, disbursementStatus);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndLoanAmountRange(Long customerId, String status, String approvalStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndApprovalStatusAndLoanAmountRange(customerId, status, approvalStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String status, String disbursementStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndDisbursementStatusAndLoanAmountRange(customerId, status, disbursementStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(customerId, approvalStatus, disbursementStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(String status, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(status, approvalStatus, disbursementStatus, minAmount, maxAmount);
-    }
-
-    public List<LoanApplication> findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(Long customerId, String status, String approvalStatus, String disbursementStatus, Double minAmount, Double maxAmount) {
-        return loanApplicationRepository.findByCustomerIdAndStatusAndApprovalStatusAndDisbursementStatusAndLoanAmountRange(customerId, status, approvalStatus, disbursementStatus, minAmount, maxAmount);
+    public List<LoanApplication> getLoanApplicationsByField1AndField2(String field1, String field2) {
+        return loanApplicationRepository.findByField1AndField2(field1, field2);
     }
 }

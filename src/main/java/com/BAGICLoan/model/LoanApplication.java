@@ -12,24 +12,18 @@ public class LoanApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String channel;
+    
+    private String field1;
+    private String field2;
+    private String field3;
+    private String email;
+    private String phoneNumber;
+    private String documentType;
+    private long documentSize;
     private String status;
-    private Long customerId;
-    private Double loanAmount;
-    private String approvalStatus;
-    private String disbursementStatus;
+    private Long userId;
 
-    public LoanApplication() {
-    }
-
-    public LoanApplication(String channel, String status, Long customerId, Double loanAmount, String approvalStatus, String disbursementStatus) {
-        this.channel = channel;
-        this.status = status;
-        this.customerId = customerId;
-        this.loanAmount = loanAmount;
-        this.approvalStatus = approvalStatus;
-        this.disbursementStatus = disbursementStatus;
-    }
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -39,12 +33,60 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public String getChannel() {
-        return channel;
+    public String getField1() {
+        return field1;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setField1(String field1) {
+        this.field1 = field1;
+    }
+
+    public String getField2() {
+        return field2;
+    }
+
+    public void setField2(String field2) {
+        this.field2 = field2;
+    }
+
+    public String getField3() {
+        return field3;
+    }
+
+    public void setField3(String field3) {
+        this.field3 = field3;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public long getDocumentSize() {
+        return documentSize;
+    }
+
+    public void setDocumentSize(long documentSize) {
+        this.documentSize = documentSize;
     }
 
     public String getStatus() {
@@ -55,35 +97,11 @@ public class LoanApplication {
         this.status = status;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Double getLoanAmount() {
-        return loanAmount;
-    }
-
-    public void setLoanAmount(Double loanAmount) {
-        this.loanAmount = loanAmount;
-    }
-
-    public String getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
-
-    public String getDisbursementStatus() {
-        return disbursementStatus;
-    }
-
-    public void setDisbursementStatus(String disbursementStatus) {
-        this.disbursementStatus = disbursementStatus;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
