@@ -1,24 +1,45 @@
 
 package com.BAGICLoan.repository;
 
-import com.BAGICLoan.model.DocumentVerification;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DocumentVerificationRepository extends JpaRepository<DocumentVerification, Long> {
+public class DocumentVerificationRepository {
 
-    @Query("SELECT CASE WHEN COUNT(dv) > 0 THEN true ELSE false END FROM DocumentVerification dv WHERE dv.identityVerified = true AND dv.addressVerified = true")
-    boolean isDocumentVerified();
+    public void openDocumentVerificationApp() {
+        System.out.println("Welcome to the Document Verification App");
+    }
 
-    @Query("SELECT CASE WHEN COUNT(dv) > 0 THEN true ELSE false END FROM DocumentVerification dv WHERE dv.identityVerified = false OR dv.addressVerified = false")
-    boolean isIncompleteDocumentVerification();
+    public String verifyIdentity(String identity) {
+        return identity != null && !identity.isEmpty() ? "yes" : "no";
+    }
 
-    @Query("SELECT CASE WHEN COUNT(dv) > 0 THEN true ELSE false END FROM DocumentVerification dv WHERE dv.annualIncome >= 30000 AND dv.creditScore >= 700")
-    boolean isHighLimitCreditScore();
+    public String verifyAddress(String address) {
+        return address != null && !address.isEmpty() ? "yes" : "no";
+    }
 
-    @Query("SELECT CASE WHEN COUNT(dv) > 0 THEN true ELSE false END FROM DocumentVerification dv WHERE dv.annualIncome >= 20000 AND dv.creditScore >= 600")
-    boolean isModerateLimitCreditScore();
+    public void checkEligibility(String identity, String address) {
+        String identityVerified = verifyIdentity(identity);
+        String addressVerified = verifyAddress(address);
 
+        if ("yes".equals(identityVerified) && "yes".equals(addressVerified)) {
+            System.out.println("Document verification successful. You are eligible for banking services.");
+        } else {
+            System.out.println("Incomplete document verification. You are not eligible for banking services.");
+        }
+    }
+
+    public void validateCreditEvaluation(double annualIncome, int creditScore) {
+        if (annualIncome >= 30000 && creditScore >= 700) {
+            System.out.println("Congratulations! You are eligible for a high-limit credit score.");
+        } else if (annualIncome >= 20000 && creditScore >= 600) {
+            System.out.println("You are eligible for a moderate-limit credit score.");
+        } else {
+            System.out.println("You are not eligible for a high-limit or moderate-limit credit score.");
+        }
+    }
+
+    public void closeApplication() {
+        System.out.println("Closing application. Thank you for using our services.");
+    }
 }

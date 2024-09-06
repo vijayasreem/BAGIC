@@ -2,9 +2,9 @@
 package com.BAGICLoan.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 @Entity
 public class DocumentVerification {
@@ -12,10 +12,9 @@ public class DocumentVerification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private boolean identityVerified;
-    private boolean addressVerified;
-    private int annualIncome;
+    private String identity;
+    private String address;
+    private double annualIncome;
     private int creditScore;
 
     public Long getId() {
@@ -26,27 +25,27 @@ public class DocumentVerification {
         this.id = id;
     }
 
-    public boolean isIdentityVerified() {
-        return identityVerified;
+    public String getIdentity() {
+        return identity;
     }
 
-    public void setIdentityVerified(boolean identityVerified) {
-        this.identityVerified = identityVerified;
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 
-    public boolean isAddressVerified() {
-        return addressVerified;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressVerified(boolean addressVerified) {
-        this.addressVerified = addressVerified;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getAnnualIncome() {
+    public double getAnnualIncome() {
         return annualIncome;
     }
 
-    public void setAnnualIncome(int annualIncome) {
+    public void setAnnualIncome(double annualIncome) {
         this.annualIncome = annualIncome;
     }
 
