@@ -8,7 +8,7 @@ public class BankingController {
 
     @GetMapping("/verifyDocuments")
     public String verifyDocuments(@RequestParam String identityVerified, @RequestParam String addressVerified) {
-        if ("yes".equalsIgnoreCase(identityVerified) && "yes".equalsIgnoreCase(addressVerified)) {
+        if (identityVerified.equalsIgnoreCase("yes") && addressVerified.equalsIgnoreCase("yes")) {
             return "Document verification successful. You are eligible for banking services.";
         } else {
             return "Incomplete document verification. You are not eligible for banking services.";

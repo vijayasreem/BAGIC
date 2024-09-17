@@ -4,15 +4,16 @@ import java.util.Scanner;
 public class BankingService {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        openDocumentVerificationApp(scanner);
-        scanner.close();
+        openDocumentVerificationApp();
     }
 
-    private static void openDocumentVerificationApp(Scanner scanner) {
+    private static void openDocumentVerificationApp() {
         System.out.println("Welcome to the Document Verification App");
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Enter identity verification (yes/no): ");
         String identityVerified = scanner.nextLine();
+
         System.out.print("Enter address verification (yes/no): ");
         String addressVerified = scanner.nextLine();
 
@@ -22,11 +23,14 @@ public class BankingService {
         } else {
             System.out.println("Incomplete document verification. You are not eligible for banking services.");
         }
+
+        scanner.close();
     }
 
     private static void validateCreditEvaluation(Scanner scanner) {
         System.out.print("Enter annual income: ");
         double annualIncome = scanner.nextDouble();
+
         System.out.print("Enter credit score: ");
         int creditScore = scanner.nextInt();
 

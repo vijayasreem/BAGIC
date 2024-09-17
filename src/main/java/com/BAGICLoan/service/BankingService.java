@@ -6,29 +6,31 @@ import java.util.Scanner;
 public class BankingService {
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            openDocumentVerificationApp(scanner);
-        }
+        openDocumentVerificationApp();
     }
 
-    private static void openDocumentVerificationApp(Scanner scanner) {
+    private static void openDocumentVerificationApp() {
         System.out.println("Welcome to the Document Verification App");
-        System.out.print("Enter identity verification (yes/no): ");
-        String identityVerified = scanner.nextLine();
-        System.out.print("Enter address verification (yes/no): ");
-        String addressVerified = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter identity verification (yes/no): ");
+            String identityVerified = scanner.nextLine();
 
-        if ("yes".equalsIgnoreCase(identityVerified) && "yes".equalsIgnoreCase(addressVerified)) {
-            System.out.println("Document verification successful. You are eligible for banking services.");
-            validateCreditEvaluation(scanner);
-        } else {
-            System.out.println("Incomplete document verification. You are not eligible for banking services.");
+            System.out.print("Enter address verification (yes/no): ");
+            String addressVerified = scanner.nextLine();
+
+            if (identityVerified.equalsIgnoreCase("yes") && addressVerified.equalsIgnoreCase("yes")) {
+                System.out.println("Document verification successful. You are eligible for banking services.");
+                validateCreditEvaluation(scanner);
+            } else {
+                System.out.println("Incomplete document verification. You are not eligible for banking services.");
+            }
         }
     }
 
     private static void validateCreditEvaluation(Scanner scanner) {
         System.out.print("Enter annual income: ");
         double annualIncome = scanner.nextDouble();
+
         System.out.print("Enter credit score: ");
         int creditScore = scanner.nextInt();
 

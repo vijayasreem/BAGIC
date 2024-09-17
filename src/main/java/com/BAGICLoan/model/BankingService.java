@@ -15,15 +15,6 @@ public class BankingService {
     private double annualIncome;
     private int creditScore;
 
-    public BankingService() {}
-
-    public BankingService(boolean identityVerified, boolean addressVerified, double annualIncome, int creditScore) {
-        this.identityVerified = identityVerified;
-        this.addressVerified = addressVerified;
-        this.annualIncome = annualIncome;
-        this.creditScore = creditScore;
-    }
-
     public Long getId() {
         return id;
     }
