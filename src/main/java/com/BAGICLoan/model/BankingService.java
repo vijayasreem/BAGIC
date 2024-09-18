@@ -15,6 +15,8 @@ public class BankingService {
     private double annualIncome;
     private int creditScore;
 
+    // Getters and Setters
+
     public Long getId() {
         return id;
     }
