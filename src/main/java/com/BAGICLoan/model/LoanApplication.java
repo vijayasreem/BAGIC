@@ -1,5 +1,5 @@
 
-package com.BAGICLoan.model;
+package com.example.loanapplication.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,18 +12,17 @@ public class LoanApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String field1;
-    private String field2;
-    private String field3;
+    private String name;
     private String email;
-    private String phoneNumber;
-    private String documentType;
-    private long documentSize;
-    private String status;
-    private Long userId;
+    private Double amount;
 
-    // Getters and Setters
+    public LoanApplication() {}
+
+    public LoanApplication(String name, String email, Double amount) {
+        this.name = name;
+        this.email = email;
+        this.amount = amount;
+    }
 
     public Long getId() {
         return id;
@@ -33,28 +32,12 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public String getField1() {
-        return field1;
+    public String getName() {
+        return name;
     }
 
-    public void setField1(String field1) {
-        this.field1 = field1;
-    }
-
-    public String getField2() {
-        return field2;
-    }
-
-    public void setField2(String field2) {
-        this.field2 = field2;
-    }
-
-    public String getField3() {
-        return field3;
-    }
-
-    public void setField3(String field3) {
-        this.field3 = field3;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -65,43 +48,11 @@ public class LoanApplication {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
-
-    public long getDocumentSize() {
-        return documentSize;
-    }
-
-    public void setDocumentSize(long documentSize) {
-        this.documentSize = documentSize;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }
